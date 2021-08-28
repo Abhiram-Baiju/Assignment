@@ -32,7 +32,6 @@ public class Main {
                 check = false;
             }
         }
-            System.out.println("Hello")
-            System.out.println("Hello")    
+            System.out.println("Hello")   
         }
 }

@@ -51,25 +51,25 @@ class calculate{
     public static void main(String[] args) {
 
             Scanner n= new Scanner(System.in);
-            System.out.println("Enter the rasius of the circle");
+            System.out.println("Enter the radius of the circle");
             double Re= n.nextDouble();
             System.out.println("Enter the length of rectangle");
             double le= n.nextDouble();
-            System.out.println("Enter the bredth of rectangle");
+            System.out.println("Enter the breadth of rectangle");
 
         double br=n.nextDouble();
         Circle c=new Circle();
 
         Reactangle r= new Reactangle();
         double r_area=r.area(le,br);
-        double r_peremeter=r.perimeter(le,br);
+        double r_perimeter=r.perimeter(le,br);
         double c_perimeter=c.perimeter(Re);
         double c_area=c.area(Re);
 
-        System.out.println("Area of triagle="+c_area);
-        System.out.println("Perimeter of triangle="+c_perimeter);
+        System.out.println("Area of circle="+c_area);
+        System.out.println("Perimeter of circle="+c_perimeter);
         System.out.println("Area of rectangle="+r_area);
-        System.out.println("Perimeter of rectangle="+r_peremeter);
+        System.out.println("Perimeter of rectangle="+r_perimeter);
     }
 
 

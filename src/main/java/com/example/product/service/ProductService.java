@@ -46,6 +46,7 @@ public class ProductService {
     }
 
     public List<Product> getProductsByPriceGreaterThan() {
-    return getProductsByPriceGreaterThan();
+        double price=500;
+        return sr.findByPriceGreaterThan(price);
     }
 }

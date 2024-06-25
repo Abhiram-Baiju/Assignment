@@ -36,14 +36,13 @@ public class ProductController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable long id) {
+    public void deleteProduct(@PathVariable long id) {
         pS.deleteProduct((long) id);
-        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/price-greater-than/{price}")
+    @GetMapping("/price/{price}")
     public List<Product> getProductsByPriceGreaterThan(@PathVariable double price) {
-        return pS.getProductsByPriceGreaterThan(price);
+        return pS.getProductsByPriceGreaterThan();
     }
 }
 

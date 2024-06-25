@@ -1,6 +1,9 @@
 package com.example.product.model;
 
+import org.springframework.data.annotation.Id;
+
 public class Product {
+    @Id
     private long id;
     private String name;
     private double price;

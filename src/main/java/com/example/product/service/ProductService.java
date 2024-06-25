@@ -1,5 +1,8 @@
 package com.example.product.service;
 
+import com.example.product.repository.ShopRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.example.product.model.Product;
 
@@ -9,43 +12,40 @@ import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
-
+    @Autowired
+    private ShopRepo sr;
     private List<Product> productList = new ArrayList<>();
+
     private AtomicLong counter = new AtomicLong();
 
     public Product createProduct(Product product) {
         long id = counter.incrementAndGet();
         product.setId(id);
-        productList.add(product);
+        sr.save(product);
         return product;
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(productList);
+        return sr.findAll();
     }
 
     public Optional<Product> getProductById(Long id) {
-        return productList.stream().filter(product -> product.getId()==(id)).findFirst();
+        return sr.findById(id);
     }
 
     public Product updateProduct(Long id, Product productDetails) {
-        for (Product product : productList) {
-            if (product.getId()==(id)) {
-                product.setName(productDetails.getName());
-                product.setPrice(productDetails.getPrice());
-                return product;
-            }
-        }
-        return null;
+        return sr.findById(id).map(productList -> {
+            productList.setName(productDetails.getName());
+            productList.setPrice(productDetails.getPrice());
+            return sr.save(productList);
+        }).orElseThrow(() -> new RuntimeException("Employee not found with id " + id));
     }
 
     public void deleteProduct(Long id) {
-        productList.removeIf(product -> product.getId()==(id));
+        sr.deleteById(id);
     }
 
-    public List<Product> getProductsByPriceGreaterThan(double price) {
-        return productList.stream()
-                .filter(product -> product.getPrice() > price)
-                .collect(Collectors.toList());
+    public List<Product> getProductsByPriceGreaterThan() {
+    return getProductsByPriceGreaterThan();
     }
 }

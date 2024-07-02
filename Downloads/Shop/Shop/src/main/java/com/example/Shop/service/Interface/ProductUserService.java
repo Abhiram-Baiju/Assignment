@@ -8,5 +8,5 @@ public interface ProductUserService {
     void createProductUser(ProductUser productUser);
     List<ProductUser> getAlluser();
     void deleteUser(String id);
-    void updateUser(ProductUser updatedProductUser, String id);
+    //void updateUser(ProductUser updatedProductUser, String id);
 }

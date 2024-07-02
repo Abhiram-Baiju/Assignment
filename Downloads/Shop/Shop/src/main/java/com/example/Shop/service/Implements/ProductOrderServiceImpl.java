@@ -26,7 +26,7 @@ public class ProductOrderServiceImpl implements ProductOrderService {
 
     public void updateOrder(ProductOrder updatedProductOrder, String id) {
         orderRepo.findById(id).map(productOrder -> {
-            productOrder.setuserName(updatedProductOrder.getUserName());
+            //productOrder.setuserName(updatedProductOrder.getUserName());
             productOrder.setOrderDate(updatedProductOrder.getOrderDate());
             productOrder.setStatus(updatedProductOrder.getStatus());
             productOrder.setTotalAmount(updatedProductOrder.getTotalAmount());

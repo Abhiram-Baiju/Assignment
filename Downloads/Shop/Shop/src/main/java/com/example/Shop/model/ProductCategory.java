@@ -4,33 +4,44 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "ProductCategory")
+
 public class ProductCategory {
     @Id
-    private String id;
-    private String name;
+    private String CategoryId;
+    private int id;
+    private String CategoryName;
+
+    public ProductCategory(String categoryId, int id, String categoryName) {
+        CategoryId = categoryId;
+        this.id = id;
+        CategoryName = categoryName;
+    }
 
     public ProductCategory() {
     }
 
-    public ProductCategory(String id, String name) {
-        this.id = id;
-        this.name = name;
+    public String getCategoryId() {
+        return CategoryId;
     }
 
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
+    }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public int setId(int id) {
+        return this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCategoryName() {
+        return CategoryName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
     }
 }
+

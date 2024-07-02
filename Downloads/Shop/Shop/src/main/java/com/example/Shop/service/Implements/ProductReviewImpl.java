@@ -22,17 +22,15 @@ public class ProductReviewImpl implements ProductReviewService {
 
     public void updateReview(ProductReview updatedProductReview, String id) {
         reviewRepo.findById(id).map(productReview -> {
-            productReview.setProductId(updatedProductReview.getProductId());
             productReview.setReviewText(updatedProductReview.getReviewText());
             productReview.setRating(updatedProductReview.getRating());
             return reviewRepo.save(productReview);
-        }).orElseThrow(() -> new RuntimeException("ProductReview not found with id " + id));
-    }
+        }).orElseThrow(() -> new RuntimeException("ProductReview not found with id " + id));}
+
 
     public void deleteProductReview(String id) {
         reviewRepo.deleteById(id);
     }
-
 
     public List<ProductReview> getRatingLessThan(double rating) {
         return reviewRepo.findByRatingLessThan(rating);

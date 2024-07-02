@@ -21,10 +21,10 @@ public class productOrderController {
         return pOS.getAllorder();
    }
 
-   @PutMapping(path ="/productOrder/{id}")
-   public void updateOrder(@RequestBody ProductOrder productOrder,@PathVariable String id){
-        pOS.updateOrder(productOrder,id);
-   }
+//   @PutMapping(path ="/productOrder/{id}")
+//   public void updateOrder(@RequestBody ProductOrder productOrder,@PathVariable String id){
+//        pOS.updateOrder(productOrder,id);
+//   }
 
    @DeleteMapping(path = "/productOrder/{id}")
     public void deleteOrder(@PathVariable String id){
@@ -34,6 +34,5 @@ public class productOrderController {
     public List<ProductOrder> getOrderByUserName(@PathVariable String userName){
        return pOS.getOrderByUserName(userName);
     }
-
 
 }

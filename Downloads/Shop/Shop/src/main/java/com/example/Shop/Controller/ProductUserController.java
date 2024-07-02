@@ -26,9 +26,8 @@ public class ProductUserController {
     productUserService.deleteUser(id);
   }
 
-    @PutMapping(path = "/productUser/{id}")
-     public void updateUser(@RequestBody ProductUser productUser,@PathVariable String id){
-         productUserService.updateUser(productUser,id);
-  }
+//    @PutMapping(path = "/productUser/{id}")
+//     public void updateUser(@RequestBody ProductUser productUser,@PathVariable String id){
+//         productUserService.updateUser(productUser,id);}
 }
 

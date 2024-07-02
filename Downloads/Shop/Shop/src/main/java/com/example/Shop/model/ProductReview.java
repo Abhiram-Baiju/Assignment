@@ -6,35 +6,55 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "ProductReview")
 public class ProductReview {
     @Id
-    private String id;
-    private String productId;
+    private Product id;
+    private Product name;
+    private ProductCategory categoryId;
+    private ProductCategory CategoryName;
     private String reviewText;
     private Double rating;
 
     public ProductReview() {
     }
 
-    public ProductReview(String id, String productId, String reviewText, Double rating) {
+    public ProductReview(Product id, Product name, ProductCategory categoryId, ProductCategory categoryName, String reviewText, Double rating) {
         this.id = id;
-        this.productId = productId;
+        this.name = name;
+        this.categoryId = categoryId;
+        CategoryName = categoryName;
         this.reviewText = reviewText;
         this.rating = rating;
     }
 
-    public String getId() {
+    public Product getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Product id) {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+    public Product getName() {
+        return name;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setName(Product name) {
+        this.name = name;
+    }
+
+    public ProductCategory getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(ProductCategory categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public ProductCategory getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(ProductCategory categoryName) {
+        CategoryName = categoryName;
     }
 
     public String getReviewText() {

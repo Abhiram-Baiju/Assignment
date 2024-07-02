@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 
@@ -27,20 +28,25 @@ public class ProductController {
   }
 
     @DeleteMapping(path = "/product/{id}")
-        public void deleteProduct(@PathVariable String id){
+        public void deleteProduct(@PathVariable int id){
         ps.deleteProduct(id);
   }
 
     @PutMapping(path = "/product/{id}")
-        public void updateProduct(@RequestBody Product product,@PathVariable String id){
+        public void updateProduct(@RequestBody Product product,@PathVariable int id){
         ps.updateProduct(product,id);
   }
-    @GetMapping("/productAbove/{price}")
+    @GetMapping("/product/{price}")
     public List<Product> getProductByPriceGreaterThan(@PathVariable double price) {
         return ps.getProductByPriceGreaterThan(price);
     }
-    @GetMapping("/productName/{name}")
+    @GetMapping("/product/{name}")
     public  List<Product>getProductByName(@PathVariable String name){
         return ps.getProductByname(name);
     }
+//    @PatchMapping(path = "/product/{id}")
+//    public void updateProductPartial(@PathVariable String id, @RequestBody Map<String, Object> updates) {
+//        ps.updateProductPartial(id, updates);
+//    }
 }
+

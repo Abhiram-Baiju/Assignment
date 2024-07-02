@@ -28,10 +28,10 @@ public class ProductReviewController {
         prs.deleteProductReview(id);
     }
 
-    @PutMapping(path = "/productReview/{id}")
-    public void updateReview(@RequestBody ProductReview productReview, @PathVariable String id) {
-        prs.updateReview(productReview, id);
-    }
+//    @PutMapping(path = "/productReview/{id}")
+//    public void updateReview(@RequestBody ProductReview productReview, @PathVariable String id) {
+//        prs.updateReview(productReview, id);
+//    }
 
     @GetMapping("/productReview/{rating}")
     public List<ProductReview>getRatingLessThan(@PathVariable double rating){

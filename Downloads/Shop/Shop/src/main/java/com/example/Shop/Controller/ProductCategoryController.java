@@ -18,7 +18,7 @@ public class ProductCategoryController {
         pcs.CreateaProductCategory(productCategory);
     }
 
-    @GetMapping(path = "/productCategory")
+    @GetMapping(path = "/product/Category")
     public List<ProductCategory> getAllCategory()
     {
         return pcs.getAllcategory();
@@ -29,7 +29,7 @@ public class ProductCategoryController {
         pcs.updateProductCategory(productCategory,id);
     }
 
-    @DeleteMapping(path = "productCategory/{id}")
+    @DeleteMapping(path = "product/Category/{id}")
     public void deleteProductCategory(@PathVariable String id){
         pcs.deleteProductCategory(id);
     }

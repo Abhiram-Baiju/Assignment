@@ -20,16 +20,16 @@ public class ProductServiceImpl implements ProductService {
         return shopRepo.findAll();
     }
 
-    public void deleteProduct(String id) {
+    public void deleteProduct(int id) {
         shopRepo.deleteById(id);
     }
 
-    public void updateProduct(Product updatedProduct, String id) {
+    public void updateProduct(Product updatedProduct, int id) {
         shopRepo.findById(id).map(product -> {
             product.setId(updatedProduct.getId());
             product.setName(updatedProduct.getName());
             product.setPrice(updatedProduct.getPrice());
-            product.setCategoryid(updatedProduct.getCategoryid());
+            product.setCategoryIid(updatedProduct.getCategoryIid());
             product.setQuantity(updatedProduct.getQuantity());
             return shopRepo.save(product);
         }).orElseThrow(()->new RuntimeException("Product not found"+id));
@@ -43,4 +43,7 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductByname(String name) {
         return shopRepo.findByName(name);
     }
+
+
 }
+

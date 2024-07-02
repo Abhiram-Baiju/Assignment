@@ -27,8 +27,8 @@ public class ProductCategoryImpl implements ProductCategoryService {
 
     public void updateProductCategory(ProductCategory updateProductCategory,String id) {
         categoryRepo.findById(id).map(productCategory -> {
-            productCategory.setId(updateProductCategory.getId());
-            productCategory.setName(updateProductCategory.getName());
+            productCategory.setCategoryId(updateProductCategory.getCategoryId());
+            productCategory.setCategoryName(updateProductCategory.getCategoryName());
             return categoryRepo.save(productCategory);
         }).orElseThrow(() -> new RuntimeException("Product not found with id " + id));;
     }

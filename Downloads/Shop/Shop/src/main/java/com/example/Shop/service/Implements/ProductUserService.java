@@ -23,15 +23,15 @@ public class ProductUserService implements com.example.Shop.service.Interface.Pr
         userRepo.deleteById(id);
     }
 
-    public void updateUser(ProductUser updatedProductUser, String id) {
-        userRepo.findById(id).map(productUser -> {
-            productUser.setId(updatedProductUser.getId());
-            productUser.setName(updatedProductUser.getName());
-            productUser.setEmail(updatedProductUser.getEmail());
-            productUser.setPassword(updatedProductUser.getPassword());
-            productUser.setAddress(updatedProductUser.getAddress());
-            productUser.setPhoneNumber(updatedProductUser.getPhoneNumber());
-            return userRepo.save(productUser);
-        }).orElseThrow(() -> new RuntimeException("ProductUser not found with id " + id));
-    }
+//    public void updateUser(ProductUser updatedProductUser, String id) {
+//        userRepo.findById(id).map(productUser -> {
+//            productUser.setUserId(updatedProductUser.getUserId());
+//            productUser.setName(updatedProductUser.getName());
+//            productUser.setEmail(updatedProductUser.getEmail());
+//            productUser.setPassword(updatedProductUser.getPassword());
+//            productUser.setAddress(updatedProductUser.getAddress());
+//            productUser.setPhoneNumber(updatedProductUser.getPhoneNumber());
+//            return userRepo.save(productUser);
+//        }).orElseThrow(() -> new RuntimeException("ProductUser not found with id " + id));
+//    }
 }

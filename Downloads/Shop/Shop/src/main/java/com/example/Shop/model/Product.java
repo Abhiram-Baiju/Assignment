@@ -1,34 +1,36 @@
 package com.example.Shop.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 
 @Document(collection ="Product")
 public class Product {
+    @Transient
+    public static final String SEQUENCE_NAME = "id";
     @Id
-    private String id;
+    private int id;
     private String name;
     private double price;
-    private String categoryid;
+    private String categoryIid;
     private double quantity;
 
-    public Product(String id, String name, double price, String categoryid, double quantity) {
+    public Product(int id, String name, double price, String categoryIid, double quantity) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.categoryid = categoryid;
+        this.categoryIid = categoryIid;
         this.quantity = quantity;
     }
 
     public Product() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -48,12 +50,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategoryid() {
-        return categoryid;
+    public String getCategoryIid() {
+        return categoryIid;
     }
 
-    public void setCategoryid(String categoryid) {
-        this.categoryid = categoryid;
+    public void setCategoryIid(String categoryIid) {
+        this.categoryIid = categoryIid;
     }
 
     public double getQuantity() {

@@ -1,75 +1,24 @@
 package com.example.Shop.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "ProductReview")
 public class ProductReview {
+    @Transient
+    public static final String SEQUENCE_NAME = "review_Id";
     @Id
-    private long id;
-    private Product name;
-    private ProductCategory categoryId;
-    private ProductCategory CategoryName;
+    private long  reviewId;
     private String reviewText;
     private Double rating;
+    private long userId;
 
-    public ProductReview() {
-    }
-
-    public ProductReview(long id, Product name, ProductCategory categoryId, ProductCategory categoryName, String reviewText, Double rating) {
-        this.id = id;
-        this.name = name;
-        this.categoryId = categoryId;
-        CategoryName = categoryName;
-        this.reviewText = reviewText;
-        this.rating = rating;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public Product getName() {
-        return name;
-    }
-
-    public void setName(Product name) {
-        this.name = name;
-    }
-
-    public ProductCategory getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(ProductCategory categoryId) {
-        this.categoryId = categoryId;
-    }
-
-    public ProductCategory getCategoryName() {
-        return CategoryName;
-    }
-
-    public void setCategoryName(ProductCategory categoryName) {
-        CategoryName = categoryName;
-    }
-
-    public String getReviewText() {
-        return reviewText;
-    }
-
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
-    }
-
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
 }

@@ -14,8 +14,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductOrder{
-   // @Transient
-   //public static final String SEQUENCE_NAME = "order_id";
+   @Transient
+   public static final String SEQUENCE_NAME = "order_id";
     @Id
     private long id;
     private String userName;

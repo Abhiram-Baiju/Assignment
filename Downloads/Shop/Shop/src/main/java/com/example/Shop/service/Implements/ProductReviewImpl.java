@@ -3,6 +3,7 @@ package com.example.Shop.service.Implements;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.service.Interface.ProductReviewService;
+import com.example.Shop.service.Interface.sequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,11 @@ import java.util.List;
 public class ProductReviewImpl implements ProductReviewService {
     @Autowired
     private ReviewRepo reviewRepo;
-
+    @Autowired
+    private sequenceGeneratorService sg;
 
     public void createProductReview(ProductReview productReview) {
+        productReview.setUserId(sg.generateSequence(productReview.SEQUENCE_NAME));
         reviewRepo.save(productReview);
     }
 

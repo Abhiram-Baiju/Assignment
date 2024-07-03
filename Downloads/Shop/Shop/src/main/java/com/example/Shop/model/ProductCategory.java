@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductCategory {
-  //  @Transient
-  // public static final String SEQUENCE_NAME = "category_id";
+    @Transient
+  public static final String SEQUENCE_NAME = "category_id";
     @Id
     private long categoryId;
     private String categoryName;

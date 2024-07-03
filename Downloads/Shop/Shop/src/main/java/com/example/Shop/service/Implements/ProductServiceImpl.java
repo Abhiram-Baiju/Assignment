@@ -2,6 +2,7 @@ package com.example.Shop.service.Implements;
 
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductUser;
+import com.example.Shop.repository.ProductCategoryRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
 import com.example.Shop.service.Interface.sequenceGeneratorService;
@@ -16,13 +17,13 @@ public class ProductServiceImpl implements ProductService {
     private ShopRepo shopRepo;
     @Autowired
     private sequenceGeneratorService sg;
-    public void createProductUser(Product product) {
-        product.setId(sg.generateSequence(product.SEQUENCE_NAME));
-        shopRepo.save(product);
-    }
+    @Autowired
+    private ProductCategoryRepo productCategoryRepo;
+
 
     @Override
     public void createProduct(Product product){
+        product.setId(sg.generateSequence(product.SEQUENCE_NAME));
         shopRepo.save(product);
     }
 
@@ -69,4 +70,5 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProductByname(String name) {
         return shopRepo.findByName(name);
     }
+
 }

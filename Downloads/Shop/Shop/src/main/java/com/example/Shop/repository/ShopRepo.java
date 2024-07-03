@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-public interface ShopRepo extends MongoRepository<Product,Integer> {
+public interface ShopRepo extends MongoRepository<Product,Long> {
     List<Product> findByPriceGreaterThan(double price);
     List<Product> findByName(String name);
+
+    List<Product> findByPriceGreaterThanAndName(double price, String name);
 }

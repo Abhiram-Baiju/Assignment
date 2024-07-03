@@ -24,7 +24,7 @@ public class ProductReviewController {
     }
 
     @DeleteMapping(path = "/productReview/{id}")
-    public void deleteProductReview(@PathVariable String id) {
+    public void deleteProductReview(@PathVariable long id) {
         prs.deleteProductReview(id);
     }
 

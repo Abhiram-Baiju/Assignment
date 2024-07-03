@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface ReviewRepo extends MongoRepository<ProductReview,String> {
+public interface ReviewRepo extends MongoRepository<ProductReview,Long> {
     List<ProductReview> findByRatingLessThan(double rating);
 }

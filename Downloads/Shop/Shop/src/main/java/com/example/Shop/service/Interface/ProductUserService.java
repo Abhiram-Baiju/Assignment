@@ -7,6 +7,8 @@ import java.util.List;
 public interface ProductUserService {
     void createProductUser(ProductUser productUser);
     List<ProductUser> getAlluser();
-    void deleteUser(String id);
+    void deleteUser(long id);
+
+    void updateUser(ProductUser productUser, long id);
     //void updateUser(ProductUser updatedProductUser, String id);
 }

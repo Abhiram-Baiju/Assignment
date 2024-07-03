@@ -12,6 +12,7 @@ public class ProductReviewImpl implements ProductReviewService {
     @Autowired
     private ReviewRepo reviewRepo;
 
+
     public void createProductReview(ProductReview productReview) {
         reviewRepo.save(productReview);
     }
@@ -20,7 +21,7 @@ public class ProductReviewImpl implements ProductReviewService {
         return reviewRepo.findAll();
     }
 
-    public void updateReview(ProductReview updatedProductReview, String id) {
+    public void updateReview(ProductReview updatedProductReview, long id) {
         reviewRepo.findById(id).map(productReview -> {
             productReview.setReviewText(updatedProductReview.getReviewText());
             productReview.setRating(updatedProductReview.getRating());
@@ -28,7 +29,7 @@ public class ProductReviewImpl implements ProductReviewService {
         }).orElseThrow(() -> new RuntimeException("ProductReview not found with id " + id));}
 
 
-    public void deleteProductReview(String id) {
+    public void deleteProductReview(long id) {
         reviewRepo.deleteById(id);
     }
 

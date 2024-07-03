@@ -3,16 +3,17 @@ package com.example.Shop.service.Interface;
 import com.example.Shop.model.Product;
 
 import java.util.List;
-import java.util.Map;
 
-public interface ProductService{
-    void createProduct(Product product);
+public interface ProductService {
+
     List<Product> getAllProduct();
-    void deleteProduct(int id);
-     void updateProduct(Product updatedProduct, int id);
+    void deleteProduct(long id);
+    void updateProduct(Product updatedProduct, long id);
     List<Product> getProductByPriceGreaterThan(double price);
     List<Product> getProductByname(String name);
 
-    //void updateProductPartial(String , Map<String, Object> );
-}
+    void createProduct(Product product);
 
+    List<Product> getProductByPriceGreaterThanAndName(Double minPrice, String name);
+    List<Product> getProductByPriceGreaterThanAndName(double price, String name);
+}

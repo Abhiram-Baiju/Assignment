@@ -1,5 +1,6 @@
 package com.example.Shop.service.Interface;
 
-public interface SequenceGeneratorService {
-    int getSequenceNumber(String sequenceName);
+public interface sequenceGeneratorService {
+    long generateSequence(String seqName);
 }
+

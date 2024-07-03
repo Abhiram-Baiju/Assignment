@@ -22,12 +22,12 @@ public class ProductUserController {
     }
 
     @DeleteMapping(path = "/productUser/{id}")
-     public void deleteUser(@PathVariable String id){
+     public void deleteUser(@PathVariable long id){
     productUserService.deleteUser(id);
   }
 
-//    @PutMapping(path = "/productUser/{id}")
-//     public void updateUser(@RequestBody ProductUser productUser,@PathVariable String id){
-//         productUserService.updateUser(productUser,id);}
+@PutMapping(path = "/productUser/{id}")
+     public void updateUser(@RequestBody ProductUser productUser,@PathVariable long id){
+        productUserService.updateUser(productUser,id);}
 }
 

@@ -27,7 +27,7 @@ public class productOrderController {
 //   }
 
    @DeleteMapping(path = "/productOrder/{id}")
-    public void deleteOrder(@PathVariable String id){
+    public void deleteOrder(@PathVariable long id){
         pOS. deleteOrder(id);
     }
     @GetMapping(path = "/productOrder/{userName}")

@@ -1,5 +1,6 @@
 package com.example.Shop.Controller;
 
+import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
 import com.example.Shop.service.Interface.ProductCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +26,12 @@ public class ProductCategoryController {
     }
 
     @PutMapping("/productCategory/{id}")
-    public void updateProductCateory(@RequestBody ProductCategory productCategory,@PathVariable String id){
+    public void updateProductCateory(@RequestBody ProductCategory productCategory,@PathVariable long id){
         pcs.updateProductCategory(productCategory,id);
     }
 
     @DeleteMapping(path = "product/Category/{id}")
-    public void deleteProductCategory(@PathVariable String id){
+    public void deleteProductCategory(@PathVariable long id){
         pcs.deleteProductCategory(id);
     }
 

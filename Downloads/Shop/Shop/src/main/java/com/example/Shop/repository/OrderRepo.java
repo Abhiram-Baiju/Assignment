@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderRepo extends MongoRepository<ProductOrder,String> {
+public interface OrderRepo extends MongoRepository<ProductOrder,Long> {
 
     List<ProductOrder> findByUserName(String userName);
 }

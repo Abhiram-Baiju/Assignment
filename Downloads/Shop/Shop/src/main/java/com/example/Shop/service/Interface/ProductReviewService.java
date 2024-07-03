@@ -8,6 +8,6 @@ public interface ProductReviewService {
     void createProductReview(ProductReview productReview);
     List<ProductReview> getAllProductReview();
     //void updateReview(ProductReview updatedProductReview, String id);
-    void deleteProductReview(String id);
+    void deleteProductReview(long id);
     List<ProductReview> getRatingLessThan(double rating);
 }

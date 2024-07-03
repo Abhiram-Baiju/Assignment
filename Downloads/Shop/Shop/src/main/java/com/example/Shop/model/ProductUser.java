@@ -1,12 +1,15 @@
 package com.example.Shop.model;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "ProductUser")
 public class ProductUser {
+    @Transient
+   public static final String SEQUENCE_NAME = "user_id";
     @Id
-    private String userId;
+    private long userId;
     private String name;
     private String email;
     private String password;
@@ -16,8 +19,7 @@ public class ProductUser {
     public ProductUser() {
     }
 
-    public ProductUser(String id, String name, String email, String password, String address, String phoneNumber) {
-        this.userId = id;
+    public ProductUser(String name, String email, String password, String address, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
@@ -25,11 +27,11 @@ public class ProductUser {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 

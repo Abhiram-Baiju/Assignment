@@ -7,6 +7,6 @@ import java.util.List;
 public interface ProductCategoryService {
     void CreateaProductCategory(ProductCategory productCategory);
     List<ProductCategory> getAllcategory();
-    void deleteProductCategory(String id);
-    void updateProductCategory(ProductCategory updateProductCategory,String id);
+    void deleteProductCategory(long id);
+    void updateProductCategory(ProductCategory updateProductCategory,long id);
 }

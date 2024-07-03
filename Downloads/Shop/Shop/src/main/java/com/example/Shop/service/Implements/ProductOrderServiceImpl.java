@@ -1,6 +1,7 @@
 package com.example.Shop.service.Implements;
 
 import com.example.Shop.model.ProductOrder;
+import com.example.Shop.model.ProductUser;
 import com.example.Shop.repository.OrderRepo;
 import com.example.Shop.service.Interface.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,10 @@ import java.util.List;
 public class ProductOrderServiceImpl implements ProductOrderService {
     @Autowired
     private OrderRepo orderRepo;
-
+//    public void createProductUser(ProductUser productUser) {
+//        productUser.setUserId(orderRepo.generateSequence(productUser.SEQUENCE_NAME));
+//        OrderRepo.save(productUser);
+//    }
     public void CreateProductOrder(ProductOrder productOrder) {
         orderRepo.save(productOrder);
     }
@@ -19,12 +23,12 @@ public class ProductOrderServiceImpl implements ProductOrderService {
         return orderRepo.findAll();
     }
 
-    public void deleteOrder(String id) {
+    public void deleteOrder(long id) {
         orderRepo.deleteById(id);
     }
 
 
-    public void updateOrder(ProductOrder updatedProductOrder, String id) {
+    public void updateOrder(ProductOrder updatedProductOrder, long id) {
         orderRepo.findById(id).map(productOrder -> {
             //productOrder.setuserName(updatedProductOrder.getUserName());
             productOrder.setOrderDate(updatedProductOrder.getOrderDate());

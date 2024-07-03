@@ -7,30 +7,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="Product")
 public class Product {
     @Transient
-    public static final String SEQUENCE_NAME = "id";
+    public static final String SEQUENCE_NAME = "product_id";
     @Id
-    private int id;
+    private long id;
     private String name;
     private double price;
-    private String categoryIid;
+    private long categoryId;
     private double quantity;
-
-    public Product(int id, String name, double price, String categoryIid, double quantity) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.categoryIid = categoryIid;
-        this.quantity = quantity;
-    }
 
     public Product() {
     }
 
-    public int getId() {
+    public Product( String name, double price, long categoryId, double quantity) {
+        this.name = name;
+        this.price = price;
+        this.categoryId = categoryId;
+        this.quantity = quantity;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -50,12 +49,12 @@ public class Product {
         this.price = price;
     }
 
-    public String getCategoryIid() {
-        return categoryIid;
+    public long getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategoryIid(String categoryIid) {
-        this.categoryIid = categoryIid;
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public double getQuantity() {

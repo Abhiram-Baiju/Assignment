@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
@@ -13,9 +14,11 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductOrder{
+   // @Transient
+   //public static final String SEQUENCE_NAME = "order_id";
     @Id
-    private Product id;
-    private ProductUser userName;
+    private long id;
+    private String userName;
     private String orderDate;
     private String status;
     private List<Product> product;

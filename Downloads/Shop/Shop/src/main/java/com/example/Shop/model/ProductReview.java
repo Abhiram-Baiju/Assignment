@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "ProductReview")
 public class ProductReview {
     @Id
-    private Product id;
+    private long id;
     private Product name;
     private ProductCategory categoryId;
     private ProductCategory CategoryName;
@@ -16,7 +16,7 @@ public class ProductReview {
     public ProductReview() {
     }
 
-    public ProductReview(Product id, Product name, ProductCategory categoryId, ProductCategory categoryName, String reviewText, Double rating) {
+    public ProductReview(long id, Product name, ProductCategory categoryId, ProductCategory categoryName, String reviewText, Double rating) {
         this.id = id;
         this.name = name;
         this.categoryId = categoryId;
@@ -25,11 +25,11 @@ public class ProductReview {
         this.rating = rating;
     }
 
-    public Product getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Product id) {
+    public void setId(long id) {
         this.id = id;
     }
 

@@ -1,6 +1,6 @@
 package com.example.Shop.Controller;
 
-import com.example.Shop.model.ProductOrder;
+import com.example.Shop.model.Order;
 import com.example.Shop.service.Interface.ProductOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +13,12 @@ public class productOrderController {
     private ProductOrderService pOS;
 
     @PostMapping(path="productOrder")
-    public void createProductOrder(@RequestBody ProductOrder productOrder){
-        pOS.CreateProductOrder(productOrder);
+    public void createProductOrder(@RequestBody Order order){
+        pOS.CreateProductOrder(order);
     }
     @GetMapping(path = "/productOrder")
-    public List<ProductOrder>getAllOrder(){
-        return pOS.getAllorder();
+    public List<Order>getAllOrder(){
+        return pOS.getAllOrder();
    }
 
 //   @PutMapping(path ="/productOrder/{id}")
@@ -30,9 +30,10 @@ public class productOrderController {
     public void deleteOrder(@PathVariable long id){
         pOS. deleteOrder(id);
     }
-    @GetMapping(path = "/productOrder/{userName}")
-    public List<ProductOrder> getOrderByUserName(@PathVariable String userName){
-       return pOS.getOrderByUserName(userName);
+
+    @GetMapping(path ="/productOrder/{userId}")
+    public List<Order> getOrderByUserId(@PathVariable long userId){
+       return pOS.getOrderByUserId(userId);
     }
 
 }

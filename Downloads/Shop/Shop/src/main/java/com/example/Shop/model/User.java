@@ -5,7 +5,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "ProductUser")
-public class ProductUser {
+public class User {
     @Transient
    public static final String SEQUENCE_NAME = "user_id";
     @Id
@@ -16,15 +16,15 @@ public class ProductUser {
     private String address;
     private String phoneNumber;
 
-    public ProductUser() {
-    }
-
-    public ProductUser(String name, String email, String password, String address, String phoneNumber) {
+    public User(String name, String email, String password, String address, String phoneNumber) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public User() {
     }
 
     public long getUserId() {
@@ -75,4 +75,3 @@ public class ProductUser {
         this.phoneNumber = phoneNumber;
     }
 }
-

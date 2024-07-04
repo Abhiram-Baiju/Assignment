@@ -1,11 +1,8 @@
 package com.example.Shop.service.Implements;
 
-import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
-import com.example.Shop.model.ProductUser;
 import com.example.Shop.repository.ProductCategoryRepo;
 import com.example.Shop.service.Interface.ProductCategoryService;
-import com.example.Shop.service.Interface.ProductService;
 import com.example.Shop.service.Interface.sequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

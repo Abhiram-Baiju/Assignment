@@ -1,8 +1,9 @@
 package com.example.Shop.service.Implements;
 
 import com.example.Shop.model.Product;
-import com.example.Shop.model.ProductUser;
+import com.example.Shop.model.ProductReview;
 import com.example.Shop.repository.ProductCategoryRepo;
+import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
 import com.example.Shop.service.Interface.sequenceGeneratorService;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -18,7 +20,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private sequenceGeneratorService sg;
     @Autowired
-    private ProductCategoryRepo productCategoryRepo;
+    private ProductReview productReview;
+    @Autowired
+    private ReviewRepo reviewRepo;
 
 
     @Override
@@ -69,6 +73,15 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductByname(String name) {
         return shopRepo.findByName(name);
+    }
+
+    @Override
+    public List<ProductReview> getProductsWithLowRating(double rating) {
+        List<ProductReview> lowRatedReviews = reviewRepo.findByRatingLessThan(rating);
+        List<Long> productIds = lowRatedReviews.stream()
+                .map(ProductReview::getId)
+                .collect(Collectors.toList());
+        return reviewRepo.findAllById(productIds);
     }
 
 }

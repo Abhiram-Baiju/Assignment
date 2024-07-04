@@ -1,6 +1,7 @@
 package com.example.Shop.service.Interface;
 
 import com.example.Shop.model.Product;
+import com.example.Shop.model.ProductReview;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface ProductService {
 
     List<Product> getProductByPriceGreaterThanAndName(Double minPrice, String name);
     List<Product> getProductByPriceGreaterThanAndName(double price, String name);
+
+    List<ProductReview> getProductsWithLowRating(double rating);
 }

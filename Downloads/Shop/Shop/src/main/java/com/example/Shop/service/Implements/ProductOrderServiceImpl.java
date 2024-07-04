@@ -1,9 +1,9 @@
 package com.example.Shop.service.Implements;
 
-import com.example.Shop.model.ProductOrder;
-import com.example.Shop.model.ProductUser;
+import com.example.Shop.model.Order;
 import com.example.Shop.repository.OrderRepo;
 import com.example.Shop.service.Interface.ProductOrderService;
+import com.example.Shop.service.Interface.sequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,35 +11,36 @@ import java.util.List;
 public class ProductOrderServiceImpl implements ProductOrderService {
     @Autowired
     private OrderRepo orderRepo;
-//    public void createProductUser(ProductUser productUser) {
-//        productUser.setUserId(orderRepo.generateSequence(productUser.SEQUENCE_NAME));
-//        OrderRepo.save(productUser);
-//    }
-    public void CreateProductOrder(ProductOrder productOrder) {
-        orderRepo.save(productOrder);
+    @Autowired
+    private sequenceGeneratorService sg;
+    @Override
+    public void CreateProductOrder(Order order) {
+        order.setOrderId(sg.generateSequence(order.SEQUENCE_NAME));
+        orderRepo.save(order);
     }
-
-    public List<ProductOrder> getAllorder() {
+    @Override
+    public List<Order> getAllOrder() {
         return orderRepo.findAll();
     }
 
+    @Override
     public void deleteOrder(long id) {
         orderRepo.deleteById(id);
     }
 
-
-    public void updateOrder(ProductOrder updatedProductOrder, long id) {
-        orderRepo.findById(id).map(productOrder -> {
-            //productOrder.setuserName(updatedProductOrder.getUserName());
-            productOrder.setOrderDate(updatedProductOrder.getOrderDate());
-            productOrder.setStatus(updatedProductOrder.getStatus());
-            productOrder.setTotalAmount(updatedProductOrder.getTotalAmount());
-            return orderRepo.save(productOrder);
+    @Override
+    public void updateOrder(Order updatedOrder, long id) {
+        orderRepo.findById(id).map(order -> {
+            order.setUserId(updatedOrder.getUserId());
+            order.setOrderDate(updatedOrder.getOrderDate());
+            order.setStatus(updatedOrder.getStatus());
+            order.setTotalAmount(updatedOrder.getTotalAmount());
+            return orderRepo.save(order);
         }).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
     }
 
 
-    public List<ProductOrder> getOrderByUserName(String userName) {
-        return orderRepo.findByUserName(userName);
+    public List<Order> getOrderByUserId(long userId) {
+        return orderRepo.findByUserId(userId);
     }
 }

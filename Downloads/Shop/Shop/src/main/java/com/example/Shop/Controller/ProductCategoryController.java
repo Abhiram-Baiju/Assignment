@@ -35,5 +35,4 @@ public class ProductCategoryController {
         pcs.deleteProductCategory(id);
     }
 
-
 }

@@ -1,9 +1,9 @@
 package com.example.Shop.Controller;
 
 import com.example.Shop.model.Product;
+import com.example.Shop.model.ProductReview;
 import com.example.Shop.service.Interface.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -37,17 +37,18 @@ public class ProductController {
     public List<Product> searchProducts(@RequestParam(required = false) String name,
                                         @RequestParam(required = false) Double minPrice) {
         if (name != null && minPrice != null) {
-            // Search by both name and price
             return ps.getProductByPriceGreaterThanAndName(minPrice, name);
         } else if (name != null) {
-            // Search by name only
             return ps.getProductByname(name);
         } else if (minPrice != null) {
-            // Search by price only
             return ps.getProductByPriceGreaterThan(minPrice);
         } else {
-            // Return all products if no search criteria provided
             return ps.getAllProduct();
         }
+    }
+    //get product by rating
+    @GetMapping("/product/rating")
+    public List<ProductReview> getLowRatedProducts(@RequestParam (name = "rating", defaultValue = "2.0")double rating) {
+        return ps.getProductsWithLowRating(rating);
     }
 }

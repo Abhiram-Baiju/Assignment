@@ -16,7 +16,7 @@ public class ProductReviewImpl implements ProductReviewService {
     private sequenceGeneratorService sg;
 
     public void createProductReview(ProductReview productReview) {
-        productReview.setUserId(sg.generateSequence(productReview.SEQUENCE_NAME));
+        productReview.setReviewId(sg.generateSequence(productReview.SEQUENCE_NAME));
         reviewRepo.save(productReview);
     }
 

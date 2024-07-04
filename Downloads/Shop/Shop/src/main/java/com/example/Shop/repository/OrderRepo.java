@@ -1,13 +1,12 @@
 package com.example.Shop.repository;
 
-import com.example.Shop.model.ProductOrder;
+import com.example.Shop.model.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.mongodb.repository.Query;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface OrderRepo extends MongoRepository<ProductOrder,Long> {
+public interface OrderRepo extends MongoRepository<Order,Long> {
 
-    List<ProductOrder> findByUserName(String userName);
+
+    List<Order> findByUserId(long userId);
 }

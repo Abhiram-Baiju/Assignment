@@ -1,13 +1,14 @@
 package com.example.Shop.service.Interface;
 
-import com.example.Shop.model.ProductOrder;
+import com.example.Shop.model.Order;
 
 import java.util.List;
 
 public interface ProductOrderService {
-    void CreateProductOrder(ProductOrder productOrder);
-    List<ProductOrder> getAllorder();
+    void CreateProductOrder(Order order);
+    List<Order> getAllOrder();
     void deleteOrder(long id);
-    void updateOrder(ProductOrder updatedProductOrder, long id);
-    List<ProductOrder> getOrderByUserName(String userName);
+    void updateOrder(Order updatedOrder, long id);
+    List<Order> getOrderByUserId(long userId);
+
 }

@@ -2,18 +2,28 @@ package com.example.Shop.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection ="Product")
 public class Product {
     @Transient
     public static final String SEQUENCE_NAME = "product_id";
+
     @Id
     private long id;
     private String name;
     private double price;
     private long categoryId;
     private double quantity;
+
+    @DBRef
+    private ProductCategory category;
+
+    @DBRef
+    private List<ProductReview> reviews;
 
     public Product() {
     }
@@ -63,5 +73,12 @@ public class Product {
 
     public void setQuantity(double quantity) {
         this.quantity = quantity;
+    }
+    public List<ProductReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ProductReview> reviews) {
+        this.reviews = reviews;
     }
 }

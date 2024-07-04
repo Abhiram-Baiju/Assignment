@@ -47,8 +47,9 @@ public class ProductController {
         }
     }
     //get product by rating
+
     @GetMapping("/product/rating")
-    public List<ProductReview> getLowRatedProducts(@RequestParam (name = "rating", defaultValue = "2.0")double rating) {
-        return ps.getProductsWithLowRating(rating);
+    public List<Product> getLowRatedProducts(@RequestParam(name = "rating", defaultValue = "2") double rating) {
+        return ps.getProductsDetailsWithLowRating(rating);
     }
 }

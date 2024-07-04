@@ -18,5 +18,5 @@ public interface ProductService {
     List<Product> getProductByPriceGreaterThanAndName(Double minPrice, String name);
     List<Product> getProductByPriceGreaterThanAndName(double price, String name);
 
-    List<ProductReview> getProductsWithLowRating(double rating);
+    List<Product> getProductsDetailsWithLowRating(double rating);
 }

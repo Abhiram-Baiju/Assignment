@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReviewRepo extends MongoRepository<ProductReview,Long> {
     List<ProductReview> findByRatingLessThan(double rating);
+
 }

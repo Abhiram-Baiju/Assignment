@@ -75,13 +75,15 @@ public class ProductServiceImpl implements ProductService {
         return shopRepo.findByName(name);
     }
 
+
+
     @Override
-    public List<ProductReview> getProductsWithLowRating(double rating) {
+    public List<Product> getProductsDetailsWithLowRating(double rating) {
         List<ProductReview> lowRatedReviews = reviewRepo.findByRatingLessThan(rating);
         List<Long> productIds = lowRatedReviews.stream()
                 .map(ProductReview::getId)
                 .collect(Collectors.toList());
-        return reviewRepo.findAllById(productIds);
-    }
 
+        return shopRepo.findAllByIdIn(productIds);
+    }
 }

@@ -2,13 +2,14 @@ package com.example.Shop.service.Implements;
 
 import com.example.Shop.Dto.ProductDetailsDTO;
 import com.example.Shop.Dto.ReviewDTO;
+import com.example.Shop.Dto.SearchProductDTO;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
-//import com.example.Shop.service.Interface.SequenceGeneratorService;
+import com.example.Shop.service.Interface.sequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -19,23 +20,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl<SequenceGeneratorService> implements ProductService {
-
+public class ProductServiceImpl implements ProductService {
     @Autowired
     private ShopRepo shopRepo;
-
     @Autowired
-    private SequenceGeneratorService sequenceGeneratorService;
-
+    private sequenceGeneratorService sg;
     @Autowired
     private ReviewRepo reviewRepo;
-
     @Autowired
     private MongoOperations mongoOperations;
 
     @Override
     public void createProduct(Product product) {
-      //  product.setProductId(sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME));
+        product.setProductId(sg.generateSequence(product.SEQUENCE_NAME));
         shopRepo.save(product);
     }
 
@@ -64,6 +61,21 @@ public class ProductServiceImpl<SequenceGeneratorService> implements ProductServ
             product.setQuantity(updatedProduct.getQuantity());
             return shopRepo.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found" + id));
+    }
+
+    @Override
+    public List<Product> getProductByPriceGreaterThanAndName(double price, String name) {
+        return shopRepo.findByPriceGreaterThanAndName(price, name);
+    }
+
+    @Override
+    public List<Product> getProductByPriceGreaterThan(double price) {
+        return shopRepo.findByPriceGreaterThan(price);
+    }
+
+    @Override
+    public List<Product> getProductByname(String name) {
+        return shopRepo.findByName(name);
     }
 
     @Override
@@ -100,7 +112,9 @@ public class ProductServiceImpl<SequenceGeneratorService> implements ProductServ
         ProductDetailsDTO dto = new ProductDetailsDTO();
         dto.setProductId(product.getProductId());
         dto.setName(product.getName());
+        dto.setPrice(product.getPrice());
         dto.setCategoryId(product.getCategoryId());
+        dto.setQuantity(product.getQuantity());
 
         List<ReviewDTO> reviewDTOs = product.getReviews().stream()
                 .map(this::mapToReviewDTO)
@@ -116,5 +130,21 @@ public class ProductServiceImpl<SequenceGeneratorService> implements ProductServ
         dto.setReviewText(review.getReviewText());
         dto.setRating(review.getRating());
         return dto;
+    }
+
+    @Override
+    public List<Product> searchProducts(SearchProductDTO searchProductDTO) {
+        String name = searchProductDTO.getName();
+        Double minPrice = searchProductDTO.getMinPrice();
+
+        if (name != null && minPrice != null) {
+            return shopRepo.findByPriceGreaterThanAndName(minPrice, name);
+        } else if (name != null) {
+            return shopRepo.findByName(name);
+        } else if (minPrice != null) {
+            return shopRepo.findByPriceGreaterThan(minPrice);
+        } else {
+            return shopRepo.findAll();
+        }
     }
 }

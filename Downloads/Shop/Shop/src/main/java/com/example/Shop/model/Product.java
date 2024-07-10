@@ -7,11 +7,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection ="Product")
+@Document(collection = "Product")
 public class Product {
     @Transient
     public static final String SEQUENCE_NAME = "product_id";
-
     @Id
     private long productId;
     private String name;
@@ -79,15 +78,15 @@ public class Product {
         return reviews;
     }
 
+    public void setReviews(List<ProductReview> reviews) {
+        this.reviews = reviews;
+    }
+
     public ProductCategory getCategory() {
         return category;
     }
 
     public void setCategory(ProductCategory category) {
         this.category = category;
-    }
-
-    public void setReviews(List<ProductReview> reviews) {
-        this.reviews = reviews;
     }
 }

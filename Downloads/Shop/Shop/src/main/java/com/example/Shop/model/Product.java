@@ -28,7 +28,7 @@ public class Product {
     public Product() {
     }
 
-    public Product( String name, double price, long categoryId, double quantity) {
+    public Product(String name, double price, long categoryId, double quantity) {
         this.name = name;
         this.price = price;
         this.categoryId = categoryId;
@@ -74,9 +74,11 @@ public class Product {
     public void setQuantity(double quantity) {
         this.quantity = quantity;
     }
+
     public List<ProductReview> getReviews() {
         return reviews;
     }
+
     public ProductCategory getCategory() {
         return category;
     }
@@ -84,16 +86,8 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+
     public void setReviews(List<ProductReview> reviews) {
         this.reviews = reviews;
     }
-
-//    public long getCategoryName() {
-//        long categoryName;
-//        return categoryName;
-//    }
-//
-//    public void setCategoryName(long categoryName) {
-//        this.categoryName = categoryName;
-//    }
 }

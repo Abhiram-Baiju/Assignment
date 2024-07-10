@@ -1,17 +1,17 @@
-
 package com.example.Shop.service.Implements;
 
+import com.example.Shop.Dto.ProductDetailsDTO;
+import com.example.Shop.Dto.ReviewDTO;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
-import com.example.Shop.service.Interface.sequenceGeneratorService;
+//import com.example.Shop.service.Interface.SequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
-//import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
@@ -19,31 +19,30 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProductServiceImpl implements ProductService {
+public class ProductServiceImpl<SequenceGeneratorService> implements ProductService {
+
     @Autowired
     private ShopRepo shopRepo;
+
     @Autowired
-    private sequenceGeneratorService sg;
-    @Autowired
-    private ProductReview productReview;
+    private SequenceGeneratorService sequenceGeneratorService;
+
     @Autowired
     private ReviewRepo reviewRepo;
+
     @Autowired
     private MongoOperations mongoOperations;
 
-
     @Override
-    public void createProduct(Product product){
-        product.setProductId(sg.generateSequence(product.SEQUENCE_NAME));
+    public void createProduct(Product product) {
+      //  product.setProductId(sequenceGeneratorService.generateSequence(Product.SEQUENCE_NAME));
         shopRepo.save(product);
     }
 
     @Override
     public List<Product> getProductByPriceGreaterThanAndName(Double minPrice, String name) {
-        return null;
+        return shopRepo.findByPriceGreaterThanAndName(minPrice, name);
     }
-
-    ;
 
     @Override
     public List<Product> getAllProduct() {
@@ -68,34 +67,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByPriceGreaterThanAndName(double price, String name) {
-        return shopRepo.findByPriceGreaterThanAndName(price, name);
-    }
-
-    @Override
-    public List<Product> getProductByPriceGreaterThan(double price) {
-        return shopRepo.findByPriceGreaterThan(price);
-    }
-
-    @Override
-    public List<Product> getProductByname(String name) {
-        return shopRepo.findByName(name);
-    }
-
-
-    public List<Product> getProductsDetailsWithLowRating(double ratingThreshold) {
+    public List<ProductDetailsDTO> getProductsDetailsWithLowRating(double ratingThreshold) {
         List<Product> products = shopRepo.findAll();
         for (Product product : products) {
             product.setCategory(fetchCategoryById(product.getCategoryId()));
             product.setReviews(fetchReviewsByProductId(product.getProductId()));
         }
 
-        // Filter products based on rating
+        // Filter products based on rating and map to DTOs
         return products.stream()
                 .filter(product -> product.getReviews().stream()
                         .mapToDouble(review -> review.getRating() != null ? review.getRating() : 0)
                         .average()
                         .orElse(0) < ratingThreshold)
+                .map(this::mapToProductDetailsDTO)
                 .collect(Collectors.toList());
     }
 
@@ -110,5 +95,26 @@ public class ProductServiceImpl implements ProductService {
         query.addCriteria(Criteria.where("productId").is(productId));
         return mongoOperations.find(query, ProductReview.class);
     }
-}
 
+    private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
+        ProductDetailsDTO dto = new ProductDetailsDTO();
+        dto.setProductId(product.getProductId());
+        dto.setName(product.getName());
+        dto.setCategoryId(product.getCategoryId());
+
+        List<ReviewDTO> reviewDTOs = product.getReviews().stream()
+                .map(this::mapToReviewDTO)
+                .collect(Collectors.toList());
+        dto.setReviews(reviewDTOs);
+
+        return dto;
+    }
+
+    private ReviewDTO mapToReviewDTO(ProductReview review) {
+        ReviewDTO dto = new ReviewDTO();
+        dto.setReviewId(review.getReviewId());
+        dto.setReviewText(review.getReviewText());
+        dto.setRating(review.getRating());
+        return dto;
+    }
+}

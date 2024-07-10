@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class productOrderController {
+public class OrderController {
     @Autowired
     private ProductOrderService pOS;
 
@@ -21,10 +21,10 @@ public class productOrderController {
         return pOS.getAllOrder();
     }
 
-//   @PutMapping(path ="/productOrder/{id}")
-//   public void updateOrder(@RequestBody ProductOrder productOrder,@PathVariable String id){
-//        pOS.updateOrder(productOrder,id);
-//   }
+   @PutMapping(path ="/Order/{id}")
+   public void updateOrder(@RequestBody Order productOrder,@PathVariable long orderId){
+        pOS.updateOrder(productOrder,orderId);
+   }
 
     @DeleteMapping(path = "/Order/{productId}")
     public void deleteOrder(@PathVariable long productId){

@@ -29,14 +29,15 @@ public class ProductOrderServiceImpl implements ProductOrderService {
     }
 
     @Override
-    public void updateOrder(Order updatedOrder, long id) {
-        orderRepo.findById(id).map(order -> {
+    public void updateOrder(Order updatedOrder, long orderId) {
+        orderRepo.findById(orderId).map(order -> {
             order.setUserId(updatedOrder.getUserId());
             order.setOrderDate(updatedOrder.getOrderDate());
             order.setStatus(updatedOrder.getStatus());
             order.setTotalAmount(updatedOrder.getTotalAmount());
+//            order.setProductId(updatedOrder.getProductId());
             return orderRepo.save(order);
-        }).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
+        }).orElseThrow(() -> new RuntimeException("Product not found with orderId " + orderId));
     }
 
 

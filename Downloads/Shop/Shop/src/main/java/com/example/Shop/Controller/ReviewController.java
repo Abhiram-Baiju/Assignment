@@ -10,21 +10,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ProductReviewController {
+public class ReviewController {
     @Autowired
     private ProductReviewService prs;
 
-    @PostMapping(path = "productReview")
+    @PostMapping(path = "Review")
     public void createProductReview(@RequestBody ProductReview productReview) {
         prs.createProductReview(productReview);
     }
 
-    @GetMapping(path = "/productReview")
+    @GetMapping(path = "/Review")
     public List<ProductReview> getAllProductReview() {
         return prs.getAllProductReview();
     }
 
-    @DeleteMapping(path = "/productReview/{productId}")
+    @DeleteMapping(path = "/Review/{productId}")
     public void deleteProductReview(@PathVariable long productId) {
         prs.deleteProductReview(productId);
     }
@@ -34,7 +34,7 @@ public class ProductReviewController {
 //        prs.updateReview(productReview, id);
 //    }
 
-    @GetMapping("/productReview/rating")
+    @GetMapping("/Review/rating")
     public List<ProductReview>getRatingLessThan(@PathVariable double rating){
         return prs.getRatingLessThan(rating);
     }

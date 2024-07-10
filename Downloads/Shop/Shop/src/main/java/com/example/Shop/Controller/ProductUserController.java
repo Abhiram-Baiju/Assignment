@@ -9,26 +9,25 @@ import java.util.List;
 
 @RestController
 public class ProductUserController {
-@Autowired
-private ProductUserService productUserService;
+    @Autowired
+    private ProductUserService productUserService;
 
-    @PostMapping(path ="productUser")
-         public void createProductUser(@RequestBody User user){
+    @PostMapping(path ="User")
+    public void createProductUser(@RequestBody User user){
         productUserService. createProductUser(user);
-        }
+    }
 
-    @GetMapping(path ="/productUser")
-        public List<User>getAllUser(){
+    @GetMapping(path ="/User")
+    public List<User>getAllUser(){
         return productUserService.getAllUser();
     }
 
-    @DeleteMapping(path = "/productUser/{id}")
-        public void deleteUser(@PathVariable long id){
-    productUserService.deleteUser(id);
-  }
+    @DeleteMapping(path = "/User/{productId}")
+    public void deleteUser(@PathVariable long productId){
+        productUserService.deleteUser(productId);
+    }
 
-    @PutMapping(path = "/productUser/{id}")
-        public void updateUser(@RequestBody User user, @PathVariable long id){
-            productUserService.updateUser(user,id);}
+    @PutMapping(path = "/User/{productId}")
+    public void updateUser(@RequestBody User user, @PathVariable long productId){
+        productUserService.updateUser(user,productId);}
 }
-

@@ -23,14 +23,14 @@ public class ProductController {
         return ps.getAllProduct();
     }
 
-    @DeleteMapping(path = "/product/{id}")
-    public void deleteProduct(@PathVariable long id) {
-        ps.deleteProduct(id);
+    @DeleteMapping(path = "/{productId}")
+    public void deleteProduct(@PathVariable long productId) {
+        ps.deleteProduct(productId);
     }
 
-    @PutMapping(path = "/product/{id}")
-    public void updateProduct(@RequestBody Product product, @PathVariable long id) {
-        ps.updateProduct(product, id);
+    @PutMapping(path = "/{ProductId}")
+    public void updateProduct(@RequestBody Product product, @PathVariable long productId) {
+        ps.updateProduct(product, productId);
     }
 
     @GetMapping("/search")
@@ -48,8 +48,17 @@ public class ProductController {
     }
     //get product by rating
 
-    @GetMapping("/product/rating")
-    public List<Product> getLowRatedProducts(@RequestParam(name = "rating", defaultValue = "2") double rating) {
-        return ps.getProductsDetailsWithLowRating(rating);
-    }
+//    @GetMapping("/product/rating")
+//    public List<Product> getLowRatedProducts(@RequestParam(name = "rating", defaultValue = "2") double rating) {
+//        return ps.getProductsDetailsWithLowRating(rating);
+//    }
+
+//    @GetMapping("/low-rated")
+//    public List<Product> getLowRatedProducts(@RequestParam(name = "rating", defaultValue = "2") double rating) {
+//        return ps.getProductsDetailsWithLowRating(rating);
+//    }
+@GetMapping("/low-rated")
+public List<Product> getLowRatedProducts(@RequestParam(name = "rating", defaultValue = "2") double rating) {
+    return ps.getProductsDetailsWithLowRating(rating);
+}
 }

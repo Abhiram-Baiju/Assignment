@@ -1,13 +1,14 @@
+
 package com.example.Shop.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "ProductUser")
+@Document(collection = "User")
 public class User {
     @Transient
-   public static final String SEQUENCE_NAME = "user_id";
+    public static final String SEQUENCE_NAME = "user_id";
     @Id
     private long userId;
     private String name;

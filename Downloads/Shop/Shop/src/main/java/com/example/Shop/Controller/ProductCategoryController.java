@@ -19,20 +19,20 @@ public class ProductCategoryController {
         pcs.CreateaProductCategory(productCategory);
     }
 
-    @GetMapping(path = "/product/Category")
-    public List<ProductCategory> getAllCategory()
+    @GetMapping(path = "/productCategory")
+    public List<ProductCategory> getAllcategory()
     {
         return pcs.getAllcategory();
     }
 
-    @PutMapping("/productCategory/{id}")
-    public void updateProductCateory(@RequestBody ProductCategory productCategory,@PathVariable long id){
-        pcs.updateProductCategory(productCategory,id);
+    @PutMapping("/productCategory/{categoryId}")
+    public void updateProductCateory(@RequestBody ProductCategory productCategory,@PathVariable long categoryId){
+        pcs.updateProductCategory(productCategory,categoryId);
     }
 
-    @DeleteMapping(path = "product/Category/{id}")
-    public void deleteProductCategory(@PathVariable long id){
-        pcs.deleteProductCategory(id);
+    @DeleteMapping(path = "product/Category/{categoryId}")
+    public void deleteProductCategory(@PathVariable long categoryId){
+        pcs.deleteProductCategory(categoryId);
     }
 
 }

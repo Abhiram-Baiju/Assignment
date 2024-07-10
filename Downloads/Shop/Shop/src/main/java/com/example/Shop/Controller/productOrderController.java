@@ -12,28 +12,29 @@ public class productOrderController {
     @Autowired
     private ProductOrderService pOS;
 
-    @PostMapping(path="productOrder")
+    @PostMapping(path="Order")
     public void createProductOrder(@RequestBody Order order){
         pOS.CreateProductOrder(order);
     }
-    @GetMapping(path = "/productOrder")
+    @GetMapping(path = "/Order")
     public List<Order>getAllOrder(){
         return pOS.getAllOrder();
-   }
+    }
 
 //   @PutMapping(path ="/productOrder/{id}")
 //   public void updateOrder(@RequestBody ProductOrder productOrder,@PathVariable String id){
 //        pOS.updateOrder(productOrder,id);
 //   }
 
-   @DeleteMapping(path = "/productOrder/{id}")
-    public void deleteOrder(@PathVariable long id){
-        pOS. deleteOrder(id);
+    @DeleteMapping(path = "/Order/{productId}")
+    public void deleteOrder(@PathVariable long productId){
+        pOS. deleteOrder(productId);
     }
 
-    @GetMapping(path ="/productOrder/{userId}")
+    @GetMapping(path ="/Order/{userId}")
     public List<Order> getOrderByUserId(@PathVariable long userId){
-       return pOS.getOrderByUserId(userId);
+        return pOS.getOrderByUserId(userId);
     }
+
 
 }

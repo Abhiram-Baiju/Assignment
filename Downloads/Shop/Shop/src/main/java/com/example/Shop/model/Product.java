@@ -13,7 +13,7 @@ public class Product {
     public static final String SEQUENCE_NAME = "product_id";
 
     @Id
-    private long id;
+    private long productId;
     private String name;
     private double price;
     private long categoryId;
@@ -35,12 +35,12 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public long getId() {
-        return id;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public String getName() {
@@ -77,8 +77,23 @@ public class Product {
     public List<ProductReview> getReviews() {
         return reviews;
     }
+    public ProductCategory getCategory() {
+        return category;
+    }
 
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
     public void setReviews(List<ProductReview> reviews) {
         this.reviews = reviews;
     }
+
+//    public long getCategoryName() {
+//        long categoryName;
+//        return categoryName;
+//    }
+//
+//    public void setCategoryName(long categoryName) {
+//        this.categoryName = categoryName;
+//    }
 }

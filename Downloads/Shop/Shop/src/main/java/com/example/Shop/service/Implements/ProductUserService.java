@@ -1,3 +1,4 @@
+
 package com.example.Shop.service.Implements;
 
 import com.example.Shop.model.User;
@@ -14,20 +15,20 @@ public class ProductUserService implements com.example.Shop.service.Interface.Pr
 
     @Autowired
     private sequenceGeneratorService sg;
-@Override
+    @Override
     public void createProductUser(User user) {
         user.setUserId(sg.generateSequence(user.SEQUENCE_NAME));
         userRepo.save(user);
     }
-@Override
+    @Override
     public List<User> getAllUser() {
         return userRepo.findAll();
     }
-@Override
+    @Override
     public void deleteUser(long id) {
         userRepo.deleteById(id);
     }
-@Override
+    @Override
     public void updateUser(User updatedUser, long id) {
         userRepo.findById(id).map(productUser -> {
             productUser.setUserId(updatedUser.getUserId());

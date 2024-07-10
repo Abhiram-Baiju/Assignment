@@ -1,34 +1,34 @@
 package com.example.Shop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
-@Document(collection = "ProductOrder")
+@Document(collection = "Order")
 public class Order {
-   @Transient
-   public static final String SEQUENCE_NAME = "order_id";
+    @Transient
+    public static final String SEQUENCE_NAME = "order_id";
     @Id
     private long orderId;
     private long userId;
     private String orderDate;
     private String status;
-    private List<Product> product;
     private double totalAmount;
+    @DBRef
+    private List<Product> productId;
 
     public Order() {
     }
 
-    public Order(long userId, String orderDate, String status, List<Product> product, double totalAmount) {
+    public Order(long userId, String orderDate, String status, List<Product> productId, double totalAmount) {
         this.userId = userId;
         this.orderDate = orderDate;
         this.status = status;
-        this.product = product;
+        this.productId = productId;
         this.totalAmount = totalAmount;
     }
 
@@ -63,13 +63,14 @@ public class Order {
     public void setStatus(String status) {
         this.status = status;
     }
-
-    public List<Product> getProduct() {
-        return product;
+    public List<Long> getProductId() {
+        return productId.stream()
+                .map(Product::getProductId)
+                .collect(Collectors.toList());
     }
 
-    public void setProduct(List<Product> product) {
-        this.product = product;
+    public void setProductId(List<Product> productId) {
+        this.productId = productId;
     }
 
     public double getTotalAmount() {

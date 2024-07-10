@@ -1,13 +1,18 @@
+
 package com.example.Shop.service.Implements;
 
 import com.example.Shop.model.Product;
+import com.example.Shop.model.ProductCategory;
 import com.example.Shop.model.ProductReview;
-import com.example.Shop.repository.ProductCategoryRepo;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
 import com.example.Shop.service.Interface.sequenceGeneratorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoOperations;
+import org.springframework.data.mongodb.core.query.Criteria;
+//import org.springframework.data.mongodb.repository.Query;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,11 +28,13 @@ public class ProductServiceImpl implements ProductService {
     private ProductReview productReview;
     @Autowired
     private ReviewRepo reviewRepo;
+    @Autowired
+    private MongoOperations mongoOperations;
 
 
     @Override
     public void createProduct(Product product){
-        product.setId(sg.generateSequence(product.SEQUENCE_NAME));
+        product.setProductId(sg.generateSequence(product.SEQUENCE_NAME));
         shopRepo.save(product);
     }
 
@@ -44,14 +51,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(long id) {
-        shopRepo.deleteById(id);
+    public void deleteProduct(long productId) {
+        shopRepo.deleteById(productId);
     }
 
     @Override
     public void updateProduct(Product updatedProduct, long id) {
         shopRepo.findById(id).map(product -> {
-            product.setId(updatedProduct.getId());
+            product.setProductId(updatedProduct.getProductId());
             product.setName(updatedProduct.getName());
             product.setPrice(updatedProduct.getPrice());
             product.setCategoryId(updatedProduct.getCategoryId());
@@ -76,14 +83,32 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    public List<Product> getProductsDetailsWithLowRating(double ratingThreshold) {
+        List<Product> products = shopRepo.findAll();
+        for (Product product : products) {
+            product.setCategory(fetchCategoryById(product.getCategoryId()));
+            product.setReviews(fetchReviewsByProductId(product.getProductId()));
+        }
 
-    @Override
-    public List<Product> getProductsDetailsWithLowRating(double rating) {
-        List<ProductReview> lowRatedReviews = reviewRepo.findByRatingLessThan(rating);
-        List<Long> productIds = lowRatedReviews.stream()
-                .map(ProductReview::getId)
+        // Filter products based on rating
+        return products.stream()
+                .filter(product -> product.getReviews().stream()
+                        .mapToDouble(review -> review.getRating() != null ? review.getRating() : 0)
+                        .average()
+                        .orElse(0) < ratingThreshold)
                 .collect(Collectors.toList());
+    }
 
-        return shopRepo.findAllByIdIn(productIds);
+    private ProductCategory fetchCategoryById(long categoryId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("categoryId").is(categoryId));
+        return mongoOperations.findOne(query, ProductCategory.class);
+    }
+
+    private List<ProductReview> fetchReviewsByProductId(long productId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("productId").is(productId));
+        return mongoOperations.find(query, ProductReview.class);
     }
 }
+

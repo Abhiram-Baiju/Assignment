@@ -27,15 +27,15 @@ public class ProductCategoryImpl implements ProductCategoryService {
         return categoryRepo.findAll();
     }
     @Override
-    public void deleteProductCategory(long id) {
-        categoryRepo.deleteById(id);
+    public void deleteProductCategory(long categoryId) {
+        categoryRepo.deleteById(categoryId);
     }
     @Override
-    public void updateProductCategory(ProductCategory updateProductCategory,long id) {
-        categoryRepo.findById(id).map(productCategory -> {
+    public void updateProductCategory(ProductCategory updateProductCategory,long categoryId) {
+        categoryRepo.findById(categoryId).map(productCategory -> {
             productCategory.setCategoryId(updateProductCategory.getCategoryId());
             productCategory.setCategoryName(updateProductCategory.getCategoryName());
             return categoryRepo.save(productCategory);
-        }).orElseThrow(() -> new RuntimeException("Product not found with id " + id));
+        }).orElseThrow(() -> new RuntimeException("Product not found with id " + categoryId));
     }
 }

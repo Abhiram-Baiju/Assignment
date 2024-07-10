@@ -1,3 +1,4 @@
+
 package com.example.Shop.Controller;
 
 import com.example.Shop.model.Product;
@@ -23,9 +24,9 @@ public class ProductReviewController {
         return prs.getAllProductReview();
     }
 
-    @DeleteMapping(path = "/productReview/{id}")
-    public void deleteProductReview(@PathVariable long id) {
-        prs.deleteProductReview(id);
+    @DeleteMapping(path = "/productReview/{productId}")
+    public void deleteProductReview(@PathVariable long productId) {
+        prs.deleteProductReview(productId);
     }
 
 //    @PutMapping(path = "/productReview/{id}")

@@ -1,23 +1,19 @@
 package com.example.Shop.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 
-@Document(collection = "ProductReview")
-
+@Document(collection = "Review")
 @Component
 public class ProductReview {
     @Transient
     public static final String SEQUENCE_NAME = "review_Id";
     @Id
     private long  reviewId;
-    private long  id;
+    private long productId;
     private long   userId;
     private String reviewText;
     private Double rating;
@@ -25,8 +21,8 @@ public class ProductReview {
     public ProductReview() {
     }
 
-    public ProductReview( long id, long userId, String reviewText, Double rating) {
-        this.id = id;
+    public ProductReview(long productId, long userId, String reviewText, Double rating) {
+        this.productId = productId;
         this.userId = userId;
         this.reviewText = reviewText;
         this.rating = rating;
@@ -40,12 +36,12 @@ public class ProductReview {
         this.reviewId = reviewId;
     }
 
-    public long getId() {
-        return id;
+    public long getProductId() {
+        return productId;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     public long getUserId() {

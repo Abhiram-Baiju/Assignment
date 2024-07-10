@@ -12,6 +12,5 @@ public interface ShopRepo extends MongoRepository<Product,Long> {
     List<Product> findByPriceGreaterThan(double price);
     List<Product> findByName(String name);
     List<Product> findByPriceGreaterThanAndName(double price, String name);
-    List<Product> findAllByIdIn(List<Long> ids);
-
+    List<Product> findAllByProductIdIn(List<Long> productIds);
 }

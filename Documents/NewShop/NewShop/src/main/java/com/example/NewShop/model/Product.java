@@ -16,15 +16,16 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long productId;
+    private long id;
 
     private String name;
     private Double price;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ProductReview> reviews;
+    private List<Review> reviews;
 
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private ProductCategory productCategory;
+
 }

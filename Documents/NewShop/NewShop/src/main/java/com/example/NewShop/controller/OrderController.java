@@ -21,8 +21,8 @@ public class OrderController {
         return orderServiceImpl.getAllOrders();
     }
 
-    @GetMapping(path = "/Orders/{id}")
-    public ResponseEntity<Order> getOrderById(@PathVariable(value = "id") Long orderId) {
+    @GetMapping(path = "/Orders/{orderId}")
+    public ResponseEntity<Order> getOrderById(@PathVariable(value = "orderId") Long orderId) {
         Optional<Order> order = orderServiceImpl.getOrderById(orderId);
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -32,8 +32,8 @@ public class OrderController {
         return orderServiceImpl.createOrder(order);
     }
 
-    @PutMapping(path = "/Orders/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable(value = "id") Long orderId, @RequestBody Order orderDetails) {
+    @PutMapping(path = "/Orders/{orderId}")
+    public ResponseEntity<Order> updateOrder(@PathVariable(value = "orderId") Long orderId, @RequestBody Order orderDetails) {
         try {
             Order updatedOrder = orderServiceImpl.updateOrder(orderId, orderDetails);
             return ResponseEntity.ok(updatedOrder);
@@ -42,8 +42,8 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping(path = "/Orders/{id}")
-    public ResponseEntity<Void> deleteOrder(@PathVariable(value = "id") Long orderId) {
+    @DeleteMapping(path = "/Orders/{orderId}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable(value = "orderId") Long orderId) {
         try {
             orderServiceImpl.deleteOrder(orderId);
             return ResponseEntity.ok().build();

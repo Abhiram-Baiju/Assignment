@@ -20,6 +20,6 @@ public class ProductCategory {
 
     private String categoryName;
 
-    @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Product> products;
+//    @OneToMany(mappedBy = "productCategory")
+//    private List<Product> products;
 }

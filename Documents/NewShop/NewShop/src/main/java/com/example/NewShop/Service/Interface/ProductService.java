@@ -1,14 +1,18 @@
-//import com.example.NewShop.model.Product;
-//import org.springframework.stereotype.Service;
-//import java.util.List;
-//
-//@Service
-//public interface ProductService {
-//    Product saveProduct(Product product);
-//    Product updateProduct(Long id, Product product);
-//    void deleteProduct(Long id);
-//    Product getProductById(Long id);
-//    List<Product> getAllProducts();
-//    List<Product> getProductsByPrice(Double price);
-//    List<Product> getProductsByName(String name);
-//}
+package com.example.NewShop.Service.Interface;
+
+
+import com.example.NewShop.dto.ProductDTO;
+import com.example.NewShop.dto.SearchDTO;
+import com.example.NewShop.model.Product;
+
+import java.util.List;
+
+public interface ProductService {
+    Product createProduct(Product product);
+    Product getProductById(long productId);
+    List<Product>getAllProducts();
+    Product updateProduct(long ProductId,Product product);
+    void deleteProduct(long productId);
+    List<ProductDTO> getProductsBelowRating(double ratingThreshold);
+    List<ProductDTO> getProductsBySearch(SearchDTO searchDTO);
+}

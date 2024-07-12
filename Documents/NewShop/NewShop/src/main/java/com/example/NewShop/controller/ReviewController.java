@@ -8,29 +8,32 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @RestController
+@RequestMapping("/reviews")
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping("/reviews")
+    @PostMapping
     public ResponseEntity<Review> createProductReview(@RequestBody Review review) {
         Review createdReview = reviewService.createProductReview(review);
         return ResponseEntity.ok(createdReview);
     }
 
-    @GetMapping("/reviews/{productId}")
-    public ResponseEntity<List<Review>> getProductReviewsByProductId(@PathVariable Long productId) {
-        List<Review> reviews = reviewService.getProductReviewsByProductId(productId);
+
+
+    @GetMapping(path = "/reviews/{id}")
+    public ResponseEntity<List<Review>> getProductReviewsByProductId(@PathVariable Long id) {
+        List<Review> reviews = reviewService.getProductReviewsByProductId(id);
         return ResponseEntity.ok(reviews);
     }
 
-    @PutMapping("/reviews/{reviewId}")
+    @PutMapping(path = "/reviews/{reviewId}")
     public ResponseEntity<Review> updateProductReview(@PathVariable Long reviewId, @RequestBody Review review) {
         Review updatedReview = reviewService.updateProductReview(reviewId, review);
         return ResponseEntity.ok(updatedReview);
     }
 
-    @DeleteMapping("/reviews/{reviewId}")
+    @DeleteMapping(path = "/reviews/{reviewId}")
     public ResponseEntity<Void> deleteProductReview(@PathVariable Long reviewId) {
         reviewService.deleteProductReview(reviewId);
         return ResponseEntity.noContent().build();

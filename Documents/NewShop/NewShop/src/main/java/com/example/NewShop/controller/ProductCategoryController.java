@@ -9,34 +9,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("productCategories")
-
 public class ProductCategoryController {
 
     @Autowired
     private ProductCategoryService productCategoryService;
 
-    @PostMapping
+    @PostMapping(path = "/productCategories")
     public ResponseEntity<ProductCategory> createProductCategory(@RequestBody ProductCategory productCategory) {
         return ResponseEntity.ok(productCategoryService.createProductCategory((ProductCategory) productCategory));
     }
 
-    @GetMapping("/productCategories/{id}")
+    @GetMapping(path = "/productCategories/{id}")
     public ResponseEntity<ProductCategory> getProductCategoryById(@PathVariable("id") long categoryId) {
         return ResponseEntity.ok(productCategoryService.getProductCategoryById(categoryId));
     }
 
-    @GetMapping
+    @GetMapping(path = "/productCategories")
     public ResponseEntity<List<ProductCategory>> getAllProductCategories() {
         return ResponseEntity.ok(productCategoryService.getAllProductCategories());
     }
 
-    @PutMapping("/productCategories/{id}")
+    @PutMapping(path = "/productCategories/{id}")
     public ResponseEntity<ProductCategory> updateProductCategory(@PathVariable("id") long categoryId, @RequestBody ProductCategory productCategory) {
         return ResponseEntity.ok(productCategoryService.updateProductCategory(categoryId, productCategory));
     }
 
-    @DeleteMapping("/productCategories/{id}")
+    @DeleteMapping(path = "/productCategories/{id}")
     public ResponseEntity<Void> deleteProductCategory(@PathVariable("id") long categoryId) {
         productCategoryService.deleteProductCategory(categoryId);
         return ResponseEntity.noContent().build();

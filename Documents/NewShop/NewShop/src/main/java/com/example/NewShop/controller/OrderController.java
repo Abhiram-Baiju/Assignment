@@ -16,23 +16,23 @@ public class OrderController {
     @Autowired
     private OrderServiceImpl orderServiceImpl;
 
-    @GetMapping(path = "/Orders")
+    @GetMapping(path = "/orders")
     public List<Order> getAllOrders() {
         return orderServiceImpl.getAllOrders();
     }
 
-    @GetMapping(path = "/Orders/{orderId}")
+    @GetMapping(path = "/orders/{orderId}")
     public ResponseEntity<Order> getOrderById(@PathVariable(value = "orderId") Long orderId) {
         Optional<Order> order = orderServiceImpl.getOrderById(orderId);
         return order.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping(path = "/Orders")
+    @PostMapping(path = "/orders")
     public Order createOrder(@RequestBody Order order) {
         return orderServiceImpl.createOrder(order);
     }
 
-    @PutMapping(path = "/Orders/{orderId}")
+    @PutMapping(path = "/orders/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable(value = "orderId") Long orderId, @RequestBody Order orderDetails) {
         try {
             Order updatedOrder = orderServiceImpl.updateOrder(orderId, orderDetails);
@@ -42,7 +42,7 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping(path = "/Orders/{orderId}")
+    @DeleteMapping(path = "/orders/{orderId}")
     public ResponseEntity<Void> deleteOrder(@PathVariable(value = "orderId") Long orderId) {
         try {
             orderServiceImpl.deleteOrder(orderId);

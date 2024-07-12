@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDTO {
-    private Long productId;
+    private Long id;
     private String reviewText;
     private Double rating;
     private String categoryName;
+    private String name;
 }

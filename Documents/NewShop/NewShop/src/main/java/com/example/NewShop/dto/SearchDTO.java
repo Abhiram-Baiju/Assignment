@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SearchDTO {
-    private String name;
+    private Long productId;
+    private String productName;
     private Double price;
+    private String categoryName;
 }

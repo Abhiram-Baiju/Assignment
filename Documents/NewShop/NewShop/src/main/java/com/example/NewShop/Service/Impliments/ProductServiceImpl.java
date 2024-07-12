@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,13 +36,14 @@ public class ProductServiceImpl implements ProductService {
         return productRepo.findAll();
     }
 
+
     @Override
     public Product updateProduct(long ProductId, Product product) {
         Product existingProduct = productRepo.findById(ProductId).orElseThrow(() -> new RuntimeException("Product not found"));
         existingProduct.setName(product.getName());
         existingProduct.setPrice(product.getPrice());
         existingProduct.setProductCategory(product.getProductCategory());
-        //existingProduct.setReviews(product.getReviews());
+        existingProduct.setReviews(product.getReviews());
         return productRepo.save(existingProduct);
     }
 
@@ -50,6 +52,9 @@ public class ProductServiceImpl implements ProductService {
         productRepo.deleteById(productId);
 
     }
+
+
+
     @Override
     public List<ProductDTO> getProductsBelowRating(double ratingThreshold) {
         return productRepo.findAll().stream()
@@ -59,17 +64,22 @@ public class ProductServiceImpl implements ProductService {
                                 product.getId(),
                                 review.getReviewText(),
                                 review.getRating(),
-                                product.getProductCategory().getCategoryName()
+                                product.getProductCategory().getCategoryName(),
+                                product.getName()
                         )))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<ProductDTO> getProductsBySearch(SearchDTO searchDTO) {
-        return productRepo.findByNameContainingAndPriceGreaterThan(
-                        searchDTO.getName(), searchDTO.getPrice())
-                .stream()
-                .map(product -> new ProductDTO(
+    public List<SearchDTO> findProductsPricedAbove(double price) {
+        List<Product> products = productRepo.findByPriceGreaterThan(price);
+
+        if (products == null || products.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        return products.stream()
+                .map(product -> new SearchDTO(
                         product.getId(),
                         product.getName(),
                         product.getPrice(),
@@ -77,6 +87,43 @@ public class ProductServiceImpl implements ProductService {
                 ))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<SearchDTO> findProductsByName(String name) {
+        List<Product>products=productRepo.findByName(name);
+
+        if (products == null || products.isEmpty()) {
+            return new ArrayList<>(); // or throw a custom exception if needed
+        }
+
+        return products.stream()
+                .map(product -> new SearchDTO(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getProductCategory().getCategoryName()
+        ))
+                .collect(Collectors.toList());
+    }
+
+
+    //    @Override
+//    public List<ProductDTO> getProductsBySearch(SearchDTO searchDTO) {
+//        return productRepo.findByNameContainingAndPriceGreaterThan(
+//                        searchDTO.getName(), searchDTO.getPrice())
+//                .stream()
+//                .map(product -> new ProductDTO(
+//                        product.getId(),
+//                        product.getName(),
+//                        product.getPrice(),
+//                        product.getProductCategory().getCategoryName()
+//                ))
+//                .collect(Collectors.toList());
+//    }
+//@Override
+//public List<SearchDTO> getProductsBySearch(double price) {
+//
+//}
 
 
 }

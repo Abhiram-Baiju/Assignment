@@ -4,8 +4,6 @@ public class SearchProductDTO {
     private String name;
     private Double minPrice;
 
-    // Getters and Setters
-
     public String getName() {
         return name;
     }

@@ -14,7 +14,7 @@ public class ProductCategoryController {
     @Autowired
     private ProductCategoryService pcs;
 
-    @PostMapping(path = "productCategory")
+    @PostMapping(path = "/productCategory")
     public void CreateProductCategory(@RequestBody ProductCategory productCategory){
         pcs.CreateaProductCategory(productCategory);
     }
@@ -25,12 +25,12 @@ public class ProductCategoryController {
         return pcs.getAllcategory();
     }
 
-    @PutMapping("/productCategory/{categoryId}")
-    public void updateProductCateory(@RequestBody ProductCategory productCategory,@PathVariable long categoryId){
+    @PutMapping(path = "/productCategory/{categoryId}")
+    public void updateProductCategory(@RequestBody ProductCategory productCategory,@PathVariable long categoryId){
         pcs.updateProductCategory(productCategory,categoryId);
     }
 
-    @DeleteMapping(path = "product/Category/{categoryId}")
+    @DeleteMapping(path = "productCategory/{categoryId}")
     public void deleteProductCategory(@PathVariable long categoryId){
         pcs.deleteProductCategory(categoryId);
     }

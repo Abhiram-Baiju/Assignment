@@ -14,7 +14,7 @@ public class ReviewController {
     @Autowired
     private ProductReviewService prs;
 
-    @PostMapping(path = "Review")
+    @PostMapping(path = "/Review")
     public void createProductReview(@RequestBody ProductReview productReview) {
         prs.createProductReview(productReview);
     }
@@ -34,7 +34,7 @@ public class ReviewController {
 //        prs.updateReview(productReview, id);
 //    }
 
-    @GetMapping("/Review/rating")
+    @GetMapping(path = "/Review/rating")
     public List<ProductReview>getRatingLessThan(@PathVariable double rating){
         return prs.getRatingLessThan(rating);
     }

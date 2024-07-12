@@ -12,7 +12,7 @@ public class OrderController {
     @Autowired
     private ProductOrderService pOS;
 
-    @PostMapping(path="Order")
+    @PostMapping(path="/Order")
     public void createProductOrder(@RequestBody Order order){
         pOS.CreateProductOrder(order);
     }
@@ -21,7 +21,7 @@ public class OrderController {
         return pOS.getAllOrder();
     }
 
-   @PutMapping(path ="/Order/{id}")
+   @PutMapping(path ="/Order/{productId}")
    public void updateOrder(@RequestBody Order productOrder,@PathVariable long orderId){
         pOS.updateOrder(productOrder,orderId);
    }

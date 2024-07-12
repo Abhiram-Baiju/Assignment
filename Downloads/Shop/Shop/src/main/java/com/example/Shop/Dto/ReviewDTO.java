@@ -28,5 +28,6 @@ public class ReviewDTO {
     }
 
     public void setRating(Double rating) {
+        this.rating = rating;
     }
 }

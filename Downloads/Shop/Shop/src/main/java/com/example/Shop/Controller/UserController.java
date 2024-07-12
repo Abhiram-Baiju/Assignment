@@ -12,7 +12,7 @@ public class UserController {
     @Autowired
     private ProductUserService productUserService;
 
-    @PostMapping(path ="User")
+    @PostMapping(path ="/User")
     public void createProductUser(@RequestBody User user){
         productUserService. createProductUser(user);
     }

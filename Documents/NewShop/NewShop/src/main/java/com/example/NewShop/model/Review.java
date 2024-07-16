@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Size;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,6 +20,7 @@ public class Review {
     private long reviewId;
 
     private String userId;
+    @Size(max = 250, message = "Review text must not exceed 250 characters")
     private String reviewText;
     private Double rating;
 

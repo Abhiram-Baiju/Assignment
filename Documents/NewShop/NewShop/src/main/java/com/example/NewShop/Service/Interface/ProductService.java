@@ -14,10 +14,10 @@ public interface ProductService {
     List<Product>getAllProducts();
     Product updateProduct(long ProductId,Product product);
     void deleteProduct(long productId);
-    List<ProductDTO> getProductsBelowRating(double ratingThreshold);
+    List<ProductDTO> getProductsBelowRating(Double rating);
     //List<ProductDTO> getProductsBySearch(SearchDTO searchDTO);
 
-    List<SearchDTO> findProductsPricedAbove(double price);
+    List<SearchDTO> findProductsPricedAbove(Double price);
 
     List<SearchDTO> findProductsByName(String name);
 

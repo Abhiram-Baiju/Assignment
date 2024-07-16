@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping(path = "/ratings/{rating}")
-    public ResponseEntity<List<ProductDTO>> getProductsBelowRating(@PathVariable("rating") double rating) {
+    public ResponseEntity<List<ProductDTO>> getProductsBelowRating(@PathVariable("rating") Double rating) {
         List<ProductDTO> products = productService.getProductsBelowRating(rating);
         return ResponseEntity.ok(products);
     }
@@ -57,7 +57,7 @@ public class ProductController {
 //    }
 
     @GetMapping("/pricedAbove")
-    public ResponseEntity<List<SearchDTO>> getProductsPricedAbove(@RequestParam double price) {
+    public ResponseEntity<List<SearchDTO>> getProductsPricedAbove(@RequestParam Double price) {
         if (price <= 400) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

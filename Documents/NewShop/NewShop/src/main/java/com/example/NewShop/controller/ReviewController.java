@@ -4,17 +4,20 @@ import com.example.NewShop.Service.Interface.ReviewService;
 import com.example.NewShop.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 @RestController
 @RequestMapping("/reviews")
+@Validated
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
     @PostMapping
-    public ResponseEntity<Review> createProductReview(@RequestBody Review review) {
+    public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
         Review createdReview = reviewService.createProductReview(review);
         return ResponseEntity.ok(createdReview);
     }

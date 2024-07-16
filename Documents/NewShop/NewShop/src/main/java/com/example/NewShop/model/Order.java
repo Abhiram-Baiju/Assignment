@@ -16,5 +16,5 @@ public class Order {
     private long userId;
     private String orderDate;
     private String status;
-    private double totalAmount;
+    private Double totalAmount;
 }

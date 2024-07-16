@@ -10,7 +10,7 @@ import java.util.List;
 public interface ProductRepo extends JpaRepository<Product, Long> {
     void deleteById(long productId);
 
-    List<Product> findByNameContainingAndPriceGreaterThan(String name, double price);
+    List<Product> findByNameContainingAndPriceGreaterThan(String name, Double price);
     List<Product> findByPriceGreaterThan(Double price);
     List<Product>findByName(String name);
 

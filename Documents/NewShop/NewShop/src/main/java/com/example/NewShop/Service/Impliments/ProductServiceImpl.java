@@ -56,22 +56,23 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
-    public List<ProductDTO> getProductsBelowRating(double ratingThreshold) {
+    public List<ProductDTO> getProductsBelowRating(Double ratingThreshold) {
         return productRepo.findAll().stream()
                 .flatMap(product -> product.getReviews().stream()
                         .filter(review -> review.getRating() < ratingThreshold)
                         .map(review -> new ProductDTO(
                                 product.getId(),
-                                review.getReviewText(),
-                                review.getRating(),
+//                                review.getReviewText(),
+//                                review.getRating(),
                                 product.getProductCategory().getCategoryName(),
-                                product.getName()
+                                product.getName(),
+                                product.getReviews()//newline
                         )))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<SearchDTO> findProductsPricedAbove(double price) {
+    public List<SearchDTO> findProductsPricedAbove(Double price) {
         List<Product> products = productRepo.findByPriceGreaterThan(price);
 
         if (products == null || products.isEmpty()) {
@@ -121,7 +122,7 @@ public class ProductServiceImpl implements ProductService {
 //                .collect(Collectors.toList());
 //    }
 //@Override
-//public List<SearchDTO> getProductsBySearch(double price) {
+//public List<SearchDTO> getProductsBySearch(Double price) {
 //
 //}
 

@@ -15,22 +15,20 @@ public class Product {
     private long productId;
     private String name;
     private double price;
-    private long categoryId;
     private double quantity;
 
     @DBRef
     private ProductCategory category;
 
     @DBRef
-    private List<ProductReview> reviews;
+    private List<ProductReview> review;
 
     public Product() {
     }
 
-    public Product(String name, double price, long categoryId, double quantity) {
+    public Product(String name, double price, double quantity) {
         this.name = name;
         this.price = price;
-        this.categoryId = categoryId;
         this.quantity = quantity;
     }
 
@@ -58,14 +56,6 @@ public class Product {
         this.price = price;
     }
 
-    public long getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
-    }
-
     public double getQuantity() {
         return quantity;
     }
@@ -74,12 +64,15 @@ public class Product {
         this.quantity = quantity;
     }
 
-    public List<ProductReview> getReviews() {
-        return reviews;
+
+
+
+    public List<ProductReview> getReview() {
+        return review;
     }
 
-    public void setReviews(List<ProductReview> reviews) {
-        this.reviews = reviews;
+    public void setReview(List<ProductReview> review) {
+        this.review = review;
     }
 
     public ProductCategory getCategory() {
@@ -89,4 +82,5 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+
 }

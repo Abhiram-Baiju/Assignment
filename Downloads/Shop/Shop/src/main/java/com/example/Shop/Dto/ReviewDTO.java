@@ -1,33 +1,14 @@
 package com.example.Shop.Dto;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ReviewDTO {
     private long reviewId;
     private String reviewText;
-    private double rating;
-
-    // Getters and Setters
-
-    public long getReviewId() {
-        return reviewId;
-    }
-
-    public void setReviewId(long reviewId) {
-        this.reviewId = reviewId;
-    }
-
-    public String getReviewText() {
-        return reviewText;
-    }
-
-    public void setReviewText(String reviewText) {
-        this.reviewText = reviewText;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
+    private Double rating;
+    private long productId;
 }

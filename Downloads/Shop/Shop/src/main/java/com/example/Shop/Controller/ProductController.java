@@ -11,16 +11,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private ProductService ps;
 
-    @PostMapping(path = "/product")
+    @PostMapping
     public void createProduct(@RequestBody Product product) {
         ps.createProduct(product);
     }
 
-    @GetMapping(path = "/product")
+    @GetMapping
     public List<Product> getAllProduct() {
         return ps.getAllProduct();
     }
@@ -43,6 +44,12 @@ public class ProductController {
         searchProductDTO.setMinPrice(minPrice);
         return ps.searchProducts(searchProductDTO);
     }
+
+    @GetMapping("/low-rating/{rating}")
+    public List<ProductDetailsDTO> getProductsWithLowRating(@PathVariable Double rating) {
+        return ps.getProductsWithLowRating(rating);
+    }
+
 }
 
 

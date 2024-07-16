@@ -57,7 +57,8 @@ public class ProductServiceImpl implements ProductService{
             product.setProductId(updatedProduct.getProductId());
             product.setName(updatedProduct.getName());
             product.setPrice(updatedProduct.getPrice());
-            product.setCategoryId(updatedProduct.getCategoryId());
+            product.setCategory(updatedProduct.getCategory());
+//            product.setCategoryId(updatedProduct.get);
             product.setQuantity(updatedProduct.getQuantity());
             return shopRepo.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found" + id));
@@ -74,27 +75,10 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public List<Product> getProductByname(String name) {
+    public List<Product> getProductByName(String name) {
         return shopRepo.findByName(name);
     }
 
-    @Override
-    public List<ProductDetailsDTO> getProductsDetailsWithLowRating(double ratingThreshold) {
-        List<Product> products = shopRepo.findAll();
-        for (Product product : products) {
-            product.setCategory(fetchCategoryById(product.getCategoryId()));
-            product.setReviews(fetchReviewsByProductId(product.getProductId()));
-        }
-
-        // Filter products based on rating and map to DTOs
-        return products.stream()
-                .filter(product -> product.getReviews().stream()
-                        .mapToDouble(review -> review.getRating() != null ? review.getRating() : 0)
-                        .average()
-                        .orElse(0) < ratingThreshold)
-                .map(this::mapToProductDetailsDTO)
-                .collect(Collectors.toList());
-    }
 
     private ProductCategory fetchCategoryById(long categoryId) {
         Query query = new Query();
@@ -110,13 +94,15 @@ public class ProductServiceImpl implements ProductService{
 
     private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
         ProductDetailsDTO dto = new ProductDetailsDTO();
-        dto.setProductId(product.getProductId());
+       // dto.setProductId(product.getProductId());
         dto.setName(product.getName());
         dto.setPrice(product.getPrice());
-        dto.setCategoryId(product.getCategoryId());
+        //dto.setCategoryId(product.getCategory().getCategoryId());
+        dto.setCategoryName(product.getCategory().getCategoryName());
+        dto.setRating(product.getReview());
         dto.setQuantity(product.getQuantity());
 
-        List<ReviewDTO> reviewDTOs = product.getReviews().stream()
+        List<ReviewDTO> reviewDTOs = product.getReview().stream()
                 .map(this::mapToReviewDTO)
                 .collect(Collectors.toList());
         dto.setReviews(reviewDTOs);
@@ -147,4 +133,24 @@ public class ProductServiceImpl implements ProductService{
             return shopRepo.findAll();
         }
     }
+
+    @Override
+    public List<ProductDetailsDTO> getProductsWithLowRating(Double rating) {
+        List<Product> products = shopRepo.findAll();
+        for (Product product : products) {
+            product.setCategory(fetchCategoryById(product.getCategory().getCategoryId()));
+            product.setReview(fetchReviewsByProductId(product.getProductId()));
+        }
+
+        // Filter products based on rating and map to DTOs
+        return products.stream()
+                .filter(product -> product.getReview().stream()
+                        .mapToDouble(review -> review.getRating() != null ? review.getRating() : 0)
+                        .average()
+                        .orElse(0) < rating)
+                .map(this::mapToProductDetailsDTO)
+                .collect(Collectors.toList());
+    }
+
+
 }

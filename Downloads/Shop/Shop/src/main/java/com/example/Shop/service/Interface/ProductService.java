@@ -14,8 +14,7 @@ public interface ProductService {
     void updateProduct(Product updatedProduct, long id);
     List<Product> getProductByPriceGreaterThanAndName(double price, String name);
     List<Product> getProductByPriceGreaterThan(double price);
-    List<Product> getProductByname(String name);
-    //List<ProductDetailsDTO> getProductsDetailsWithLowRating(double ratingThreshold);
+    List<Product> getProductByName(String name);
     List<Product> searchProducts(SearchProductDTO searchProductDTO);
-    List<ProductDetailsDTO> getProductsWithLowRating(double ratingThreshold);
+    List<ProductDetailsDTO> getProductsWithLowRating(Double rating);
 }

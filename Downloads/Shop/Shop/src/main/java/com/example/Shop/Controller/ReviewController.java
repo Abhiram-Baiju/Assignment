@@ -34,8 +34,9 @@ public class ReviewController {
 //        prs.updateReview(productReview, id);
 //    }
 
-    @GetMapping(path = "/Review/rating")
+    @GetMapping(path = "/Review/rating/{rating}")
     public List<ProductReview>getRatingLessThan(@PathVariable double rating){
         return prs.getRatingLessThan(rating);
     }
+
 }

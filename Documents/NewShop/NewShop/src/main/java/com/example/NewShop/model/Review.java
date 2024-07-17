@@ -19,13 +19,17 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long reviewId;
 
-    private String userId;
-    @Size(max = 250, message = "Review text must not exceed 250 characters")
+    private String userName;
+
+    @Size(max = 10, message = "Review text must not exceed 10 characters")
     private String reviewText;
+
     private Double rating;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     @JsonBackReference
     private Product product;
+
+
 }

@@ -1,6 +1,8 @@
 package com.example.NewShop.controller;
 
 import com.example.NewShop.Service.Interface.ReviewService;
+import com.example.NewShop.dto.ProductRatingDTO;
+import com.example.NewShop.model.Product;
 import com.example.NewShop.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,19 +12,26 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 @RestController
-@RequestMapping("/reviews")
+//@RequestMapping("/reviews")
 @Validated
 public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-    @PostMapping
-    public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
-        Review createdReview = reviewService.createProductReview(review);
-        return ResponseEntity.ok(createdReview);
-    }
-
-
+//    @PostMapping(path = "/reviews")
+//    public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
+//        Review createdReview = reviewService.createProductReview(review);
+//        return ResponseEntity.ok(createdReview);
+//    }
+//    @PostMapping(path = "/reviews")
+//    public ResponseEntity<Review> createProductReview(@RequestBody Review review) {
+//        return ResponseEntity.ok(reviewService.createProductReview(review));
+//    }
+@PostMapping
+public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
+    Review createdReview = reviewService.createProductReview(review);
+    return ResponseEntity.ok(createdReview);
+}
 
     @GetMapping(path = "/reviews/{id}")
     public ResponseEntity<List<Review>> getProductReviewsByProductId(@PathVariable Long id) {
@@ -41,4 +50,11 @@ public class ReviewController {
         reviewService.deleteProductReview(reviewId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/average-rating/{productId}")
+    public ResponseEntity<ProductRatingDTO> getAverageRatingByProductId(@PathVariable Long productId) {
+        ProductRatingDTO averageRating = reviewService.getAverageRatingByProductId(productId);
+        return ResponseEntity.ok(averageRating);
+    }
+
 }

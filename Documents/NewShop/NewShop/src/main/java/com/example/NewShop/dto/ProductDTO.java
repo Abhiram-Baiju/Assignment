@@ -9,13 +9,20 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductDTO {
     private Long productId;
 //    private String reviewText;
 //    private Double rating;
+    private String productName;
     private String categoryName;
-    private String name;
-    private List<Review> review;//new line
+    private Double avgRating;
+//    private String name;
+  //  private Long averageRating;//new line
+    private List<Review> review;
+
+
+//    public ProductDTO(long id, String name, String categoryName, double averageRating, List<Review> reviews) {
+//    }
 }

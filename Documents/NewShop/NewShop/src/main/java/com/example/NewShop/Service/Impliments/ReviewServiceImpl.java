@@ -2,6 +2,8 @@ package com.example.NewShop.Service.Impliments;
 
 import com.example.NewShop.Exception.ResourceNotFoundException;
 import com.example.NewShop.Service.Interface.ReviewService;
+import com.example.NewShop.dto.ProductRatingDTO;
+import com.example.NewShop.model.Product;
 import com.example.NewShop.model.Review;
 import com.example.NewShop.repository.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,11 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewRepo reviewRepo;
+
+//    @Override
+//    public Review createProductReview(Review review) {
+//        return reviewRepo.save(review);
+//    }
 
 //    @Override
 //    public Review createProductReview(Review review) {
@@ -35,7 +42,7 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<Review> optionalReview = reviewRepo.findById(reviewId);
         if (optionalReview.isPresent()) {
             Review existingReview = optionalReview.get();
-            existingReview.setUserId(updatedReview.getUserId());
+            existingReview.setUserName(updatedReview.getUserName());
             existingReview.setReviewText(updatedReview.getReviewText());
             existingReview.setRating(updatedReview.getRating());
             existingReview.setProduct(updatedReview.getProduct());
@@ -49,5 +56,22 @@ public class ReviewServiceImpl implements ReviewService {
     public void deleteProductReview(Long reviewId) {
         reviewRepo.deleteById(reviewId);
     }
+
+@Override
+public ProductRatingDTO getAverageRatingByProductId(Long productId) {
+    List<Review> reviews = reviewRepo.findByProduct_Id(productId);
+    if (reviews.isEmpty()) {
+        throw new ResourceNotFoundException("No reviews found for product with id " + productId);
+    }
+
+    Double averageRating = reviews.stream().mapToDouble(Review::getRating).average().orElse(0.0);
+
+    Product product = reviews.get(0).getProduct();
+    String productName = product.getName();
+//    String categoryNAme=product.getProductCategory(setCategoryName());
+
+    return new ProductRatingDTO(averageRating,productName);
+}
+
 
 }

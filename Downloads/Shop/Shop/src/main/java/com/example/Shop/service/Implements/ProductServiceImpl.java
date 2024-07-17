@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService{
             product.setName(updatedProduct.getName());
             product.setPrice(updatedProduct.getPrice());
             product.setCategory(updatedProduct.getCategory());
-//            product.setCategoryId(updatedProduct.get);
+//          product.setCategoryId(updatedProduct.get);
             product.setQuantity(updatedProduct.getQuantity());
             return shopRepo.save(product);
         }).orElseThrow(() -> new RuntimeException("Product not found" + id));
@@ -92,23 +92,42 @@ public class ProductServiceImpl implements ProductService{
         return mongoOperations.find(query, ProductReview.class);
     }
 
-    private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
-        ProductDetailsDTO dto = new ProductDetailsDTO();
-       // dto.setProductId(product.getProductId());
-        dto.setName(product.getName());
-        dto.setPrice(product.getPrice());
-        //dto.setCategoryId(product.getCategory().getCategoryId());
-        dto.setCategoryName(product.getCategory().getCategoryName());
-        dto.setRating(product.getReview());
-        dto.setQuantity(product.getQuantity());
+//    private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
+//        ProductDetailsDTO dto = new ProductDetailsDTO();
+//       dto.setProductId(product.getProductId());
+//        dto.setName(product.getName());
+//        dto.setPrice(product.getPrice());
+//        //dto.setCategoryId(product.getCategory().getCategoryId());
+//        dto.setCategoryName(product.getCategory().getCategoryName());
+//        dto.setRating(product.getReview());
+//        dto.setQuantity(product.getQuantity());
+//
+//        List<ReviewDTO> reviewDTOs = product.getReview().stream()
+//                .map(this::mapToReviewDTO)
+//                .collect(Collectors.toList());
+//        dto.setReviews(reviewDTOs);
+//        return dto;
+//    }
 
-        List<ReviewDTO> reviewDTOs = product.getReview().stream()
-                .map(this::mapToReviewDTO)
-                .collect(Collectors.toList());
-        dto.setReviews(reviewDTOs);
+/////////////////////////////////////////////////////////
+private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
+    ProductDetailsDTO dto = new ProductDetailsDTO();
+    dto.setProductId(product.getProductId());
+    dto.setName(product.getName());
+    dto.setPrice(product.getPrice());
+    //dto.setCategoryId(product.getCategory().getCategoryId());
+    dto.setCategoryName(product.getCategory().getCategoryName());
+    dto.setReviewDTO(product.getReview());
+    dto.setQuantity(product.getQuantity());
 
-        return dto;
-    }
+    List<ReviewDTO> reviewDTOs = product.getReview().stream()
+            .map(this::mapToReviewDTO)
+            .collect(Collectors.toList());
+    dto.setReviewDTO(reviewDTOs);
+    return dto;
+}
+/////////////////////////////////////////////////////////
+
 
     private ReviewDTO mapToReviewDTO(ProductReview review) {
         ReviewDTO dto = new ReviewDTO();

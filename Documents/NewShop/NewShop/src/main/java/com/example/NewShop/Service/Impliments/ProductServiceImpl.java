@@ -98,7 +98,7 @@ public class ProductServiceImpl implements ProductService {
                             product.getName(),
                             product.getProductCategory().getCategoryName(),
                             averageRating,
-                            product.getReviews() // Include reviews if needed in DTO
+                            product.getReviews()
                     );
                 })
                 .collect(Collectors.toList());

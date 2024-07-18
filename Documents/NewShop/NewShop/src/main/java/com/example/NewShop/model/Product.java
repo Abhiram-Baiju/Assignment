@@ -1,5 +1,6 @@
 package com.example.NewShop.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +23,8 @@ public class Product {
     private String name;
     private Double price;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="product", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Review> reviews;
 
     @ManyToOne

@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+//import javax.validation.Valid;
 import java.util.List;
 @RestController
 //@RequestMapping("/reviews")
@@ -18,17 +18,9 @@ public class ReviewController {
     @Autowired
     private ReviewService reviewService;
 
-//    @PostMapping(path = "/reviews")
-//    public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
-//        Review createdReview = reviewService.createProductReview(review);
-//        return ResponseEntity.ok(createdReview);
-//    }
-//    @PostMapping(path = "/reviews")
-//    public ResponseEntity<Review> createProductReview(@RequestBody Review review) {
-//        return ResponseEntity.ok(reviewService.createProductReview(review));
-//    }
-@PostMapping
-public ResponseEntity<Review> createProductReview(@Valid @RequestBody Review review) {
+
+@PostMapping(path = "/reviews")
+public ResponseEntity<Review> createProductReview(  @RequestBody Review review) {
     Review createdReview = reviewService.createProductReview(review);
     return ResponseEntity.ok(createdReview);
 }

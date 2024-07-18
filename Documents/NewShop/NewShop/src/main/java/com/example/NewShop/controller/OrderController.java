@@ -1,9 +1,11 @@
 package com.example.NewShop.controller;
 
+//import com.example.NewShop.Exception.InvalidTotalAmountException;
 import com.example.NewShop.Exception.ResourceNotFoundException;
 import com.example.NewShop.Service.Impliments.OrderServiceImpl;
 import com.example.NewShop.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +33,21 @@ public class OrderController {
     public Order createOrder(@RequestBody Order order) {
         return orderServiceImpl.createOrder(order);
     }
+//
+//    @PostMapping("/create")
+//    public ResponseEntity<Order> createOrder(@RequestBody Order order) {
+//        // Validate total amount
+//        try {
+//            double totalAmount = Double.parseDouble(order.getTotalAmount());
+//            // Process order creation
+//            Order createdOrder = orderServiceImpl.createOrder(order);
+//            return ResponseEntity.status(HttpStatus.CREATED).body(createdOrder);
+//        } catch (NumberFormatException e) {
+//            throw new InvalidTotalAmountException("Total amount must be a valid number.");
+//        }
+//    }
+
+
 
     @PutMapping(path = "/orders/{orderId}")
     public ResponseEntity<Order> updateOrder(@PathVariable(value = "orderId") Long orderId, @RequestBody Order orderDetails) {

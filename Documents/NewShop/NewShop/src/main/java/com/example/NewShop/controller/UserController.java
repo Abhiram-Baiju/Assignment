@@ -2,21 +2,23 @@ package com.example.NewShop.controller;
 
 import com.example.NewShop.Service.Interface.UserService;
 import com.example.NewShop.model.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@Validated
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PostMapping(path = "/user")
-    public ResponseEntity<User> createUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
         return ResponseEntity.ok(userService.createUser(user));
     }
 

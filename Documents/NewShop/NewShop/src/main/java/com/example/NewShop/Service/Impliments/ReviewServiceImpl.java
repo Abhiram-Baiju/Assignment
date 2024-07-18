@@ -3,8 +3,10 @@ package com.example.NewShop.Service.Impliments;
 import com.example.NewShop.Exception.ResourceNotFoundException;
 import com.example.NewShop.Service.Interface.ReviewService;
 import com.example.NewShop.dto.ProductRatingDTO;
+import com.example.NewShop.dto.ReviewDTO;
 import com.example.NewShop.model.Product;
 import com.example.NewShop.model.Review;
+import com.example.NewShop.repository.ProductRepo;
 import com.example.NewShop.repository.ReviewRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,21 +18,24 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Autowired
     private ReviewRepo reviewRepo;
-
-//    @Override
-//    public Review createProductReview(Review review) {
-//        return reviewRepo.save(review);
-//    }
-
-//    @Override
-//    public Review createProductReview(Review review) {
-//        return reviewRepo.save(review);
-//    }
-
+// //og
     @Override
     public Review createProductReview(Review review) {
         return reviewRepo.save(review);
     }
+
+//    public Review createReview(ReviewDTO reviewDTO) {
+//        // Convert ReviewDTO to Review entity and save
+//        Product product = ProductRepo.product(findById(reviewDTO.getProductId()))
+//                .orElseThrow(() -> new ResourceNotFoundException("Product", "id", reviewDTO.getProductId()));
+//
+//        Review review = new Review(reviewDTO.getRating(), reviewDTO.getReviewText(), reviewDTO.getUserName(), product);
+//        return reviewRepo.save(review);
+//    }
+
+
+
+
 
     @Override
     public List<Review> getProductReviewsByProductId(Long productId) {
@@ -72,6 +77,18 @@ public ProductRatingDTO getAverageRatingByProductId(Long productId) {
 
     return new ProductRatingDTO(averageRating,productName);
 }
+
+
+
+
+//    @Override
+//    public Review createProductReview(Review review) {
+//        Long productId = review.getProduct().getProductId();
+//        Product product = productRepository.findById(productId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + productId));
+//        review.setProduct(product);
+//        return reviewRepository.save(review);
+//    }
 
 
 }

@@ -26,12 +26,5 @@ public class GlobalExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
-//    @ExceptionHandler(InvalidTotalAmountException.class)
-//    public ResponseEntity<Object> handleInvalidTotalAmountException(
-//            InvalidTotalAmountException ex, WebRequest request) {
-//        ErrorResponse errorResponse = new ErrorResponse(HttpStatus.BAD_REQUEST, ex.getMessage());
-//        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-//    }
-
 
 }

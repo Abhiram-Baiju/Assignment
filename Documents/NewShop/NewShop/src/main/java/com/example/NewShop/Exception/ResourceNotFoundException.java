@@ -17,10 +17,6 @@ public class ResourceNotFoundException extends RuntimeException {
     }
 
 
-//    //new line
-//    public ResourceNotFoundException(String product, String id, Long productId) {
-//    }
-
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleValidationExceptions(MethodArgumentNotValidException ex) {

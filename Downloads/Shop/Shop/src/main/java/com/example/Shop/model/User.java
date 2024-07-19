@@ -1,6 +1,8 @@
 
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -11,10 +13,20 @@ public class User {
     public static final String SEQUENCE_NAME = "user_id";
     @Id
     private long userId;
+    @NotNull
     private String name;
+
+    @NotNull
+    @Email(message = "Enter a valid emailid")
     private String email;
+
+    @NotNull
     private String password;
+
+    @NotNull
     private String address;
+
+    @NotNull
     private String phoneNumber;
 
     public User(String name, String email, String password, String address, String phoneNumber) {

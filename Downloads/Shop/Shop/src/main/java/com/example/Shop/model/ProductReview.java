@@ -1,5 +1,6 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,9 +14,17 @@ public class ProductReview {
     public static final String SEQUENCE_NAME = "review_Id";
     @Id
     private long  reviewId;
+
+    @NotNull
     private long productId;
+
+    @NotNull
     private long   userId;
+
+    @NotNull
     private String reviewText;
+
+    @NotNull
     private Double rating;
 
     public ProductReview() {

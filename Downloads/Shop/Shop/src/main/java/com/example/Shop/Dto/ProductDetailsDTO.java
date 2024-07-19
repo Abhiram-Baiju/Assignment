@@ -28,7 +28,7 @@ public class ProductDetailsDTO<ReviewDTO> {
 //    private List<productReview> rating;
     private List<ReviewDTO> reviewDTO;
 
-//    public void setReviews(List<ReviewDTO> reviewDTOs) {
-//    }
+    public void setReviews(List<ReviewDTO> reviewDTOs) {
+    }
 
 }

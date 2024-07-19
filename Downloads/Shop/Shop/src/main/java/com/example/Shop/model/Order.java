@@ -1,5 +1,8 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -15,9 +18,16 @@ public class Order {
     @Id
     private long orderId;
     private long userId;
+
+    @jakarta.validation.constraints.NotNull(message = "enter orderDate")
     private String orderDate;
+
+    @jakarta.validation.constraints.NotNull(message = "enter status")
     private String status;
+
+    @NotNull(message = "Enter total Amount")
     private double totalAmount;
+
     @DBRef
     private List<Product> productId;
 

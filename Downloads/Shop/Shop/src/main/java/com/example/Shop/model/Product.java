@@ -1,5 +1,6 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -13,8 +14,14 @@ public class Product {
     public static final String SEQUENCE_NAME = "product_id";
     @Id
     private long productId;
+
+    @NotNull
     private String name;
+
+    @NotNull
     private double price;
+
+    @NotNull
     private double quantity;
 
     @DBRef

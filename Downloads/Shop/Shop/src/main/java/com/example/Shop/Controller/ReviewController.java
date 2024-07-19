@@ -4,18 +4,21 @@ package com.example.Shop.Controller;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.service.Interface.ProductReviewService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Validated
 public class ReviewController {
     @Autowired
     private ProductReviewService prs;
 
     @PostMapping(path = "/Review")
-    public void createProductReview(@RequestBody ProductReview productReview) {
+    public void createProductReview(@Valid @RequestBody ProductReview productReview) {
         prs.createProductReview(productReview);
     }
 

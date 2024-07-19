@@ -3,19 +3,21 @@ package com.example.Shop.Controller;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
 import com.example.Shop.service.Interface.ProductCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-
+@Validated
 public class ProductCategoryController {
     @Autowired
     private ProductCategoryService pcs;
 
     @PostMapping(path = "/productCategory")
-    public void CreateProductCategory(@RequestBody ProductCategory productCategory){
+    public void CreateProductCategory(@Valid @RequestBody ProductCategory productCategory){
         pcs.CreateaProductCategory(productCategory);
     }
 

@@ -5,19 +5,22 @@ import com.example.Shop.Dto.SearchProductDTO;
 import com.example.Shop.model.Product;
 import com.example.Shop.service.Implements.ProductServiceImpl;
 import com.example.Shop.service.Interface.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/product")
+@Validated
 public class ProductController {
     @Autowired
     private ProductService ps;
 
     @PostMapping
-    public void createProduct(@RequestBody Product product) {
+    public void createProduct(@Valid @RequestBody Product product) {
         ps.createProduct(product);
     }
 
@@ -53,7 +56,7 @@ public class ProductController {
 }
 
 
-//    // Get products with low ratings
+    // Get products with low ratings
 //    @GetMapping("/low-rating")
 //    public List<ProductDetailsDTO> getProductsWithLowRating(@RequestParam double ratingThreshold) {
 //        ProductService productService;

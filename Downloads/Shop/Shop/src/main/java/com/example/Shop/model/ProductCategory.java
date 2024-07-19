@@ -1,5 +1,6 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ public class ProductCategory {
     public static final String SEQUENCE_NAME = "category_id";
     @Id
     private long categoryId;
+
+    @NotNull
     private String categoryName;
 
 }

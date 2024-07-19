@@ -2,6 +2,7 @@ package com.example.Shop.Controller;
 
 import com.example.Shop.model.Order;
 import com.example.Shop.service.Interface.ProductOrderService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class OrderController {
     private ProductOrderService pOS;
 
     @PostMapping(path="/Order")
-    public void createProductOrder(@RequestBody Order order){
+    public void createProductOrder(@Valid @RequestBody Order order){
         pOS.CreateProductOrder(order);
     }
     @GetMapping(path = "/Order")

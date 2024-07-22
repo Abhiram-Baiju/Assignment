@@ -19,10 +19,10 @@ public class Order {
     private long orderId;
     private long userId;
 
-    @jakarta.validation.constraints.NotNull(message = "enter orderDate")
+    @NotNull(message = "enter orderDate")
     private String orderDate;
 
-    @jakarta.validation.constraints.NotNull(message = "enter status")
+    @NotNull(message ="enter status")
     private String status;
 
     @NotNull(message = "Enter total Amount")

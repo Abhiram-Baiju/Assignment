@@ -1,11 +1,14 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Document(collection = "Product")
@@ -15,20 +18,24 @@ public class Product {
     @Id
     private long productId;
 
-    @NotNull
+    @NotEmpty
     private String name;
 
     @NotNull
-    private double price;
+    @Digits(integer = 10,fraction = 2,message = "Price must be in Digits")
+    private Double price;
 
     @NotNull
-    private double quantity;
+    @Digits(integer = 10,fraction = 2,message = "Quantity must be in Number")
+    private Double quantity;
+
+
 
     @DBRef
     private ProductCategory category;
 
     @DBRef
-    private List<ProductReview> review;
+    private List<ProductReview> review=new ArrayList<>();
 
     public Product() {
     }
@@ -89,5 +96,6 @@ public class Product {
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
+
 
 }

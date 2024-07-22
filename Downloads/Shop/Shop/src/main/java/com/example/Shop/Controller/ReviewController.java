@@ -1,11 +1,13 @@
 
 package com.example.Shop.Controller;
 
+import com.example.Shop.Dto.ProductRatingDTO;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.service.Interface.ProductReviewService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,5 +43,12 @@ public class ReviewController {
     public List<ProductReview>getRatingLessThan(@PathVariable double rating){
         return prs.getRatingLessThan(rating);
     }
+
+//New Line
+@GetMapping("/average-rating/{productId}")
+public ResponseEntity<ProductRatingDTO> getAverageRatingByProductId(@PathVariable Long productId) {
+    ProductRatingDTO averageRating = prs.getAverageRatingByProductId(productId);
+    return ResponseEntity.ok(averageRating);
+}
 
 }

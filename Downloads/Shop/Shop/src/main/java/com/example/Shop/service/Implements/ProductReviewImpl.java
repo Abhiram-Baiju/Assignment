@@ -1,5 +1,7 @@
 
 package com.example.Shop.service.Implements;
+import com.example.Shop.Dto.ProductRatingDTO;
+import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductReview;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.service.Interface.ProductReviewService;
@@ -39,4 +41,16 @@ public class ProductReviewImpl implements ProductReviewService {
     public List<ProductReview> getRatingLessThan(double rating) {
         return reviewRepo.findByRatingLessThan(rating);
     }
+//newLine
+@Override
+public ProductRatingDTO getAverageRatingByProductId(Long productId) {
+    List<ProductReview> reviews = reviewRepo.findByProductId(productId);
+
+    Double averageRating = reviews.stream().mapToDouble(ProductReview::getRating).average().orElse(0.0);
+    Product product = reviews.get(0).getProduct();
+//    String name = product.getName();
+    return new ProductRatingDTO(averageRating);//,name
 }
+
+}
+

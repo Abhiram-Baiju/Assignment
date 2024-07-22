@@ -109,6 +109,19 @@ public class ProductServiceImpl implements ProductService{
 //        return dto;
 //    }
 
+
+
+
+    private double calculateAverageRating(Product product) {
+        List<ProductReview> reviews = product.getReview();
+        if (reviews != null && !reviews.isEmpty()) {
+            return reviews.stream()
+                    .mapToDouble(ProductReview::getRating)
+                    .average()
+                    .orElse(0.0);
+        }
+        return 0.0; // Return default if no reviews or ratings available
+    }
 /////////////////////////////////////////////////////////
 private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
     ProductDetailsDTO dto = new ProductDetailsDTO();
@@ -119,6 +132,8 @@ private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
     dto.setCategoryName(product.getCategory().getCategoryName());
     dto.setReviewDTO(product.getReview());
     dto.setQuantity(product.getQuantity());
+//    double calculateAverageRating;
+//    calculateAverageRating();//NEW Line
 
     List<ReviewDTO> reviewDTOs = product.getReview().stream()
             .map(this::mapToReviewDTO)

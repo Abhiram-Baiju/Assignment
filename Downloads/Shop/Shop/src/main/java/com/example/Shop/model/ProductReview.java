@@ -1,8 +1,11 @@
 package com.example.Shop.model;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +22,19 @@ public class ProductReview {
     private long productId;
 
     @NotNull
-    private long   userId;
+    private long userId;
 
-    @NotNull
+    @NotEmpty
+    @Size(max = 5,message = "250 character is the maximum limit")
     private String reviewText;
 
     @NotNull
     private Double rating;
+
+//  newLine
+    @DBRef
+    private Product product; // Add this field
+
 
     public ProductReview() {
     }
@@ -76,4 +85,14 @@ public class ProductReview {
     public void setRating(Double rating) {
         this.rating = rating;
     }
+
+//Newline
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
 }

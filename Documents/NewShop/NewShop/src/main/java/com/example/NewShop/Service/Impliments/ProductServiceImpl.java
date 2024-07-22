@@ -108,7 +108,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product>products=productRepo.findByName(name);
 
         if (products == null || products.isEmpty()) {
-            return new ArrayList<>(); // or throw a custom exception if needed
+            return new ArrayList<>();
         }
 
         return products.stream()

@@ -14,10 +14,10 @@ import java.math.BigDecimal;
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long orderId;
 
     @NotNull(message ="uSerId cannot be empty")
-    @Min(value = 1, message = "userId must be greater than 0")
     @Positive(message = "total amount must be a valid Id")
     private long userId;
 

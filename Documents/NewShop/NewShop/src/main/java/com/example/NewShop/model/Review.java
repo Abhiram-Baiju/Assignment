@@ -32,7 +32,12 @@ public class Review {
     @JsonBackReference
     private Product product;
 
-    @NotBlank(message = "userName cannot be empty")
-    private String userName;
+//    @NotBlank(message = "userName cannot be empty")
+//    private String userName;
 
+
+    //NL
+    @ManyToOne
+    @JoinColumn(name = "user_Id", nullable = false)
+    private User user;
 }

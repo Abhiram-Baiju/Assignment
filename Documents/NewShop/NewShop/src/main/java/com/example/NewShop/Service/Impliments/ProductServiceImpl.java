@@ -4,6 +4,7 @@ package com.example.NewShop.Service.Impliments;
 
 import com.example.NewShop.Service.Interface.ProductService;
 import com.example.NewShop.dto.ProductDTO;
+import com.example.NewShop.dto.ReviewDTO;
 import com.example.NewShop.dto.SearchDTO;
 import com.example.NewShop.model.Product;
 import com.example.NewShop.model.Review;
@@ -64,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
         }
         return 0.0; // Return default if no reviews or ratings available
     }
-
+///////////////////
     @Override
     public List<ProductDTO> getProductsBelowRating(Double ratingThreshold) {
         return productRepo.findAll().stream()
@@ -74,17 +75,50 @@ public class ProductServiceImpl implements ProductService {
                 })
                 .map(product -> {
                     double averageRating = calculateAverageRating(product);
+                    List<ReviewDTO> reviewDTOs = (List<ReviewDTO>) product.getReviews().stream()
+                            .map(review -> new ReviewDTO(
+                                    review.getReviewId(),
+                                    review.getRating(),
+                                    review.getReviewText(),
+                                    review.getUser().getName() // Fetch user name
+                            ))
+                            .collect(Collectors.toList());
                     return new ProductDTO(
                             product.getId(),
                             product.getName(),
                             product.getProductCategory().getCategoryName(),
                             averageRating,
-                            product.getReviews()
+//                            product.getReviews()
+                            reviewDTOs
                     );
                 })
                 .collect(Collectors.toList());
     }
+///////////////////////////NLB
 
+///    @Override
+//    public List<ProductDTO> getProductsBelowRating(Double ratingThreshold) {
+//        return productRepo.findAll().stream()
+//                .filter(product -> {
+//                    double averageRating = calculateAverageRating(product);
+//                    return averageRating < ratingThreshold;
+//                })
+//                .map(product -> {
+//                    double averageRating = calculateAverageRating(product);
+//                    return new ProductDTO(
+//                            product.getId(),
+//                            product.getName(),
+//                            product.getProductCategory().getCategoryName(),
+//                            averageRating,
+//                            product.getReviews()
+//                    );
+//                })
+//
+//
+//
+//
+
+///////////////////////////NLE
     @Override
     public List<SearchDTO> findProductsPricedAbove(Double price) {
         List<Product> products = productRepo.findByPriceGreaterThan(price);

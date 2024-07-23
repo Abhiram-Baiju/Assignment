@@ -31,8 +31,8 @@ public class ReviewServiceImpl implements ReviewService {
         Optional<Review> optionalReview = reviewRepo.findById(reviewId);
         if (optionalReview.isPresent()) {
             Review existingReview = optionalReview.get();
-            existingReview.setUserName(updatedReview.getUserName());
-            existingReview.setReviewText(updatedReview.getReviewText());
+            existingReview.setUser(updatedReview.getUser());
+            existingReview.setReviewText(updatedReview.getReviewText());//CL
             existingReview.setRating(updatedReview.getRating());
             existingReview.setProduct(updatedReview.getProduct());
             return reviewRepo.save(existingReview);

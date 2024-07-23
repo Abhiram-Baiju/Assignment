@@ -6,6 +6,7 @@ import com.example.Shop.Dto.SearchProductDTO;
 import com.example.Shop.model.Product;
 import com.example.Shop.model.ProductCategory;
 import com.example.Shop.model.ProductReview;
+import com.example.Shop.model.User;
 import com.example.Shop.repository.ReviewRepo;
 import com.example.Shop.repository.ShopRepo;
 import com.example.Shop.service.Interface.ProductService;
@@ -86,11 +87,11 @@ public class ProductServiceImpl implements ProductService{
         return mongoOperations.findOne(query, ProductCategory.class);
     }
 
-    private List<ProductReview> fetchReviewsByProductId(long productId) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("productId").is(productId));
-        return mongoOperations.find(query, ProductReview.class);
-    }
+//    private List<ProductReview> fetchReviewsByProductId(long productId) {
+//        Query query = new Query();
+//        query.addCriteria(Criteria.where("productId").is(productId));
+//        return mongoOperations.find(query, ProductReview.class);
+//    }
 
 //    private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
 //        ProductDetailsDTO dto = new ProductDetailsDTO();
@@ -132,9 +133,8 @@ private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
     dto.setCategoryName(product.getCategory().getCategoryName());
     dto.setReviewDTO(product.getReview());
     dto.setQuantity(product.getQuantity());
-//    double calculateAverageRating;
-//    calculateAverageRating();//NEW Line
-
+   // double calculateAverageRating;
+    dto.setAverageRating(calculateAverageRating(product));
     List<ReviewDTO> reviewDTOs = product.getReview().stream()
             .map(this::mapToReviewDTO)
             .collect(Collectors.toList());
@@ -149,9 +149,14 @@ private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
         dto.setReviewId(review.getReviewId());
         dto.setReviewText(review.getReviewText());
         dto.setRating(review.getRating());
+        if (review.getUser() != null) {
+            dto.setUserName(review.getUser().getName());
+        } else {
+            dto.setUserName("Unknown User"); // or handle it in a way that fits your application's needs
+        }//NL
         return dto;
     }
-
+//product.getCategory().getCategoryName()
     @Override
     public List<Product> searchProducts(SearchProductDTO searchProductDTO) {
         String name = searchProductDTO.getName();
@@ -185,6 +190,25 @@ private ProductDetailsDTO mapToProductDetailsDTO(Product product) {
                 .map(this::mapToProductDetailsDTO)
                 .collect(Collectors.toList());
     }
+
+    private List<ProductReview> fetchReviewsByProductId(long productId) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("productId").is(productId));
+        List<ProductReview> reviews = mongoOperations.find(query, ProductReview.class);
+
+        // Fetch user details for each review
+        for (ProductReview review : reviews) {
+            if (review.getUserId() != 0) {
+                Query userQuery = new Query();
+                userQuery.addCriteria(Criteria.where("userId").is(review.getUserId()));
+                User user = mongoOperations.findOne(userQuery, User.class);
+                review.setUser(user);
+            }
+        }
+
+        return reviews;
+    }
+
 
 
 }

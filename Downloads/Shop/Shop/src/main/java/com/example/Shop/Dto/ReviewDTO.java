@@ -16,4 +16,5 @@ public class ReviewDTO {
     private long reviewId;
     private String reviewText;
     private Double rating;
+    private String userName;//NL
 }

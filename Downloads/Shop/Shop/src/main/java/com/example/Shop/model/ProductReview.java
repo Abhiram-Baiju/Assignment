@@ -31,9 +31,12 @@ public class ProductReview {
     @NotNull
     private Double rating;
 
-//  newLine
     @DBRef
-    private Product product; // Add this field
+    private Product product;
+
+    //NL
+    @DBRef
+    private User user;
 
 
     public ProductReview() {
@@ -86,7 +89,8 @@ public class ProductReview {
         this.rating = rating;
     }
 
-//Newline
+
+
     public Product getProduct() {
         return product;
     }
@@ -94,5 +98,14 @@ public class ProductReview {
     public void setProduct(Product product) {
         this.product = product;
     }
+    //NL
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 
 }

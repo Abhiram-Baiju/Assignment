@@ -25,13 +25,13 @@ public class ProductDetailsDTO<ReviewDTO> {
     private double price;
     private double quantity;
     private String categoryName;
-    private Double averating;
-//    private Double avgRating;//new line
+    private Double averageRating;
 
     //    private List<productReview> rating;
     private List<ReviewDTO> reviewDTO;
 
     public void setReviews(List<ReviewDTO> reviewDTOs) {
     }
+
 
 }
